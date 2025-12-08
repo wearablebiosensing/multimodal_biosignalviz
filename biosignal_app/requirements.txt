@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+plotly
+scipy
+firebase-admin
+google-generativeai>=0.7.0

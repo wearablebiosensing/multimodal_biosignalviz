@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  biosignal-app:
+    build: .
+    ports:
+      - "8501:8501"
+    # CRITICAL FIX 1: Run in privileged mode to bypass Mac Docker thread limits
+    privileged: true
+    # CRITICAL FIX 2: Disable security profiles that might block thread creation
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - STREAMLIT_SERVER_MAX_UPLOAD_SIZE=2000
+      - STREAMLIT_SERVER_FILE_WATCHER_TYPE=none
+      # Force libraries to use single threads (overriding build cache if necessary)
+      - OMP_NUM_THREADS=1
+      - MKL_NUM_THREADS=1
+      - OPENBLAS_NUM_THREADS=1
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    pids_limit: -1
+    container_name: biosignal_visualizer
