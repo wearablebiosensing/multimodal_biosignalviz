@@ -5,164 +5,21 @@ import plotly.express as px
 import plotly.graph_objects as go
 import scipy.signal as signal
 import scipy.stats as stats
-import time
+import neurokit2 as nk
+import wfdb
+import tempfile
+import zipfile
 import os
-import tracemalloc
-import re
-import uuid
-from datetime import datetime
-# Firebase Imports
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+import shutil
 
 # Agent Import
 import agent
-
-# -----------------------------------------------------------------------------
-# Performance Monitoring Utilities
-# -----------------------------------------------------------------------------
-class PerformanceMonitor:
-    def __init__(self):
-        self.start_time = 0
-        self.end_time = 0
-        self.start_memory = 0
-        self.peak_memory = 0
-        self.duration = 0
-        self.memory_used_mb = 0
-
-    def __enter__(self):
-        self.start_time = time.perf_counter()
-        tracemalloc.start()
-        self.start_memory = tracemalloc.get_traced_memory()[0]
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.end_time = time.perf_counter()
-        _, self.peak_memory = tracemalloc.get_traced_memory()
-        tracemalloc.stop()
-        self.duration = self.end_time - self.start_time
-        self.memory_used_mb = (self.peak_memory - self.start_memory) / (1024 * 1024)
-
-# -----------------------------------------------------------------------------
-# Firebase Configuration & Logging
-# -----------------------------------------------------------------------------
-def init_firebase():
-    """Initializes Firestore client with singleton pattern prevention."""
-    try:
-        if not firebase_admin._apps:
-            if os.path.exists('firebase_key.json'):
-                cred = credentials.Certificate('firebase_key.json')
-                firebase_admin.initialize_app(cred)
-                return firestore.client()
-            else:
-                return None
-        return firestore.client()
-    except Exception as e:
-        print(f"Firebase Init Error: {e}")
-        return None
-
-def sanitize_document_id(file_name):
-    """
-    Creates a readable, safe document ID.
-    Format: CleanName_Timestamp_ShortHash
-    Example: patient_data_csv_202310271030_a1b2
-    """
-    # Remove non-alphanumeric chars (keep underscores/hyphens)
-    clean_name = re.sub(r'[^a-zA-Z0-9_\-]', '_', file_name)
-    # Remove extension if present (e.g., .csv)
-    clean_name = clean_name.rsplit('_csv', 1)[0] if '_csv' in clean_name.lower() else clean_name
-    
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    short_uuid = str(uuid.uuid4())[:4]
-    
-    return f"{clean_name}_{timestamp}_{short_uuid}"
-
-def create_analysis_session(file_name):
-    """Creates a root session document with a readable ID."""
-    db = init_firebase()
-    if db is None: return None
-    try:
-        # Generate readable ID
-        custom_doc_id = sanitize_document_id(file_name)
-        
-        doc_ref = db.collection('analysis_logs').document(custom_doc_id)
-        doc_ref.set({
-            'file_name': file_name,
-            'session_start': firestore.SERVER_TIMESTAMP,
-            'timestamp_iso': datetime.now().isoformat(), # CSV Friendly
-            'status': 'active',
-            'user_agent_mode': 'streamlit_standard'
-        })
-        return custom_doc_id
-    except Exception as e:
-        print(f"Error creating session: {e}")
-        return None
-
-def log_visualization_metrics(doc_id, df, file_obj):
-    """Logs static file statistics with flattened fields for CSV export."""
-    db = init_firebase()
-    if db is None or not doc_id: return
-    try:
-        stats_data = {
-            'session_id': doc_id, # Link for flattened CSV
-            'file_name': file_obj.name,
-            'row_count': len(df),
-            'file_size_bytes': file_obj.size,
-            'file_type': file_obj.type if file_obj.type else "csv",
-            'total_columns': len(df.columns),
-            'memory_usage_bytes': int(df.memory_usage(deep=True).sum()),
-            'timestamp_iso': datetime.now().isoformat(), # CSV Friendly
-            'logged_at': firestore.SERVER_TIMESTAMP
-        }
-        db.collection('analysis_logs').document(doc_id).collection('file_stats').add(stats_data)
-    except Exception as e:
-        print(f"Error logging vis metrics: {e}")
-
-def log_plot_performance(doc_id, file_name, exec_time_ms, total_points, active_traces):
-    """
-    Logs dynamic plot performance with denormalized fields (Context + Data).
-    """
-    db = init_firebase()
-    if db is None or not doc_id: return
-    try:
-        perf_data = {
-            'session_id': doc_id,  # DENORMALIZED: Allows grouping without joining in CSV
-            'file_name': file_name, # DENORMALIZED: Human readable context in every row
-            'plot_gen_time_ms': float(f"{exec_time_ms:.2f}"),
-            'total_points_rendered': int(total_points),
-            'active_trace_count': int(active_traces),
-            'timestamp_iso': datetime.now().isoformat(), # CSV Friendly string
-            'timestamp': firestore.SERVER_TIMESTAMP
-        }
-        # Using 'plot_performance' subcollection for high-frequency updates
-        db.collection('analysis_logs').document(doc_id).collection('plot_performance').add(perf_data)
-    except Exception as e:
-        print(f"Error logging plot perf: {e}")
-
-def log_computation_metrics(doc_id, file_name, analysis_type, duration_sec, memory_mb, throughput_ksps=0):
-    """Logs heavy computation analysis metrics with flattened structure."""
-    db = init_firebase()
-    if db is None or not doc_id: return
-    try:
-        perf_data = {
-            'session_id': doc_id, # Link for flattened CSV
-            'file_name': file_name,
-            'analysis_type': analysis_type,
-            'execution_time_ms': duration_sec * 1000,
-            'peak_memory_mb': memory_mb,
-            'throughput_ksps': throughput_ksps,
-            'timestamp_iso': datetime.now().isoformat(), # CSV Friendly
-            'timestamp': firestore.SERVER_TIMESTAMP
-        }
-        db.collection('analysis_logs').document(doc_id).collection('computation_metrics').add(perf_data)
-    except Exception as e:
-        print(f"Error logging comp metrics: {e}")
+import firebase_module
 
 # -----------------------------------------------------------------------------
 # Page Configuration
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="Biosignal CSV Visualizer", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Biosignal Visualizer", page_icon="📈", layout="wide")
 st.title("🫀 Biosignal CSV Visualizer & Preprocessor")
 
 # -----------------------------------------------------------------------------
@@ -170,9 +27,59 @@ st.title("🫀 Biosignal CSV Visualizer & Preprocessor")
 # -----------------------------------------------------------------------------
 @st.cache_data
 def load_data(file):
+    """
+    Loads data from CSV or Zipped WFDB (PTB-XL style) files.
+    """
     try:
-        df = pd.read_csv(file, low_memory=False)
-        return df
+        # 1. Handle CSV
+        if file.name.endswith('.csv'):
+            df = pd.read_csv(file, low_memory=False)
+            return df
+        
+        # 2. Handle Zipped WFDB (common for PhysioNet downloads)
+        elif file.name.endswith('.zip'):
+            with tempfile.TemporaryDirectory() as temp_dir:
+                # Save and extract zip
+                zip_path = os.path.join(temp_dir, "temp.zip")
+                with open(zip_path, "wb") as f:
+                    f.write(file.getbuffer())
+                
+                with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                    zip_ref.extractall(temp_dir)
+                
+                # Find header files (.hea)
+                header_files = [f for f in os.listdir(temp_dir) if f.endswith('.hea')]
+                
+                if not header_files:
+                    st.error("No .hea header file found in the zip archive.")
+                    return None
+                
+                # Assume single record for simplicity, or take the first one
+                record_name = header_files[0].replace('.hea', '')
+                record_path = os.path.join(temp_dir, record_name)
+                
+                try:
+                    # Read WFDB record
+                    signals, fields = wfdb.rdsamp(record_path)
+                    
+                    # Convert to DataFrame
+                    # fields['sig_name'] contains channel names
+                    df = pd.DataFrame(signals, columns=fields['sig_name'])
+                    
+                    # Add time column based on sampling frequency
+                    fs = fields['fs']
+                    df['time'] = np.arange(len(df)) / fs
+                    
+                    return df
+                    
+                except Exception as e:
+                    st.error(f"Failed to read WFDB record: {e}")
+                    return None
+
+        else:
+            st.error("Unsupported file format. Please upload CSV or Zipped WFDB.")
+            return None
+
     except Exception as e:
         st.error(f"Error loading file: {e}")
         return None
@@ -192,41 +99,40 @@ def calculate_psd_ratio(segment, fs):
     if power_0_45 == 0: return 0
     return power_5_15 / power_0_45
 
-def process_ecg(data_series, fs):
-    norm_data = normalize_signal(data_series)
-    analytic_signal = signal.hilbert(norm_data)
-    amplitude_envelope = np.abs(analytic_signal)
+def process_ecg(data_series, fs, method="pantompkins1985"):
+    """
+    Processes ECG signal using NeuroKit2 with selectable method.
+    """
+    # Ensure data is numeric and handle NaNs
+    clean_data = pd.to_numeric(data_series, errors='coerce').fillna(0).values
     
-    distance = int(0.5 * fs)
-    width = (int(0.01 * fs), int(0.1 * fs))
-    prominence = 0.5
-    
-    peaks, _ = signal.find_peaks(amplitude_envelope, distance=distance, width=width, prominence=prominence)
-    
-    pre_samples = int(0.2 * fs)
-    post_samples = int(0.8 * fs)
-    
-    heartbeats = []
-    sqi_metrics = {'skewness': [], 'kurtosis': [], 'psd_ratio': []}
-    valid_peaks = []
-    data_values = data_series.values if hasattr(data_series, 'values') else data_series
+    # NeuroKit2 processing pipeline
+    try:
+        # 1. Clean the signal
+        # Use 'neurokit' cleaning which is generally robust
+        ecg_cleaned = nk.ecg_clean(clean_data, sampling_rate=fs, method="neurokit")
+        
+        # 2. Find Peaks using SELECTED algorithm
+        # This makes the detection adaptive based on user choice
+        peaks_dict, _ = nk.ecg_peaks(ecg_cleaned, sampling_rate=fs, method=method)
+        peaks = peaks_dict['ECG_R_Peaks']
+        
+        # 3. Calculate Heart Rate
+        heart_rate = nk.signal_rate(peaks, sampling_rate=fs, desired_length=len(clean_data))
+        
+        # 4. SQI Calculation
+        sqis = {
+            'skewness': stats.skew(ecg_cleaned),
+            'kurtosis': stats.kurtosis(ecg_cleaned),
+            'psd_ratio': calculate_psd_ratio(ecg_cleaned, fs)
+        }
+        
+        return peaks, heart_rate, sqis, ecg_cleaned
 
-    for p in peaks:
-        if p - pre_samples < 0 or p + post_samples >= len(data_values): continue
-        epoch = data_values[p - pre_samples : p + post_samples]
-        epoch = np.array(epoch, dtype=float)
-        if np.std(epoch) > 0: epoch = (epoch - np.mean(epoch)) / np.std(epoch)
-        else: epoch = epoch - np.mean(epoch)
-        heartbeats.append(epoch)
-        valid_peaks.append(p)
-        qrs_start = max(0, pre_samples - int(0.1 * fs))
-        qrs_end = min(len(epoch), pre_samples + int(0.12 * fs))
-        qrs_segment = epoch[qrs_start:qrs_end]
-        sqi_metrics['skewness'].append(stats.skew(qrs_segment))
-        sqi_metrics['kurtosis'].append(stats.kurtosis(qrs_segment))
-        sqi_metrics['psd_ratio'].append(calculate_psd_ratio(qrs_segment, fs))
-
-    return valid_peaks, heartbeats, sqi_metrics, amplitude_envelope
+    except Exception as e:
+        # If specific method fails, try fallback or just return empty
+        st.warning(f"ECG Processing Warning ({method}): {e}")
+        return [], [], {}, clean_data
 
 def butter_lowpass_filter(data, cutoff, fs, order=4):
     nyq = 0.5 * fs
@@ -246,7 +152,6 @@ def decompose_eda(data, fs, scl_cutoff=0.05):
     return scl, scr
 
 def process_eda_signal(data_series, fs):
-    # (Implementation remains identical to previous version)
     raw_values = np.array(data_series.values, dtype=float)
     raw_mean = np.mean(raw_values)
     raw_std = np.std(raw_values)
@@ -309,7 +214,8 @@ if app_mode == "CSV Concatenator (Prep)":
 elif app_mode == "Analysis Dashboard":
     with st.sidebar:
         st.header("1. Data Input")
-        uploaded_file = st.file_uploader("Drag and drop CSV file here", type=['csv'])
+        # Allow both CSV and ZIP uploads
+        uploaded_file = st.file_uploader("Drag and drop CSV or Zipped WFDB file here", type=['csv', 'zip'])
         st.header("2. View Settings")
         if uploaded_file is not None:
             st.info("💡 Tip: For large files (1M+ rows), use 'Slice Data' to zoom in.")
@@ -318,13 +224,12 @@ elif app_mode == "Analysis Dashboard":
         df = load_data(uploaded_file)
         if df is not None:
             # --- SESSION MANAGEMENT ---
-            # Check if file changed or session not init
             if 'current_file_id' not in st.session_state or st.session_state.current_file_id != uploaded_file.file_id:
-                session_id = create_analysis_session(uploaded_file.name)
+                session_id = firebase_module.create_analysis_session(uploaded_file.name)
                 st.session_state.current_file_id = uploaded_file.file_id
                 st.session_state.firebase_doc_id = session_id
                 if session_id: 
-                    log_visualization_metrics(session_id, df, uploaded_file)
+                    firebase_module.log_visualization_metrics(session_id, df, uploaded_file)
                     st.toast(f"Tracking ID: {session_id}", icon="🔥")
             
             current_doc_id = st.session_state.get('firebase_doc_id')
@@ -341,13 +246,20 @@ elif app_mode == "Analysis Dashboard":
             default_x_index = 0
             if 'samp_no' in all_cols: default_x_index = all_cols.index('samp_no')
             elif 'timestamp' in all_cols: default_x_index = all_cols.index('timestamp')
+            elif 'time' in all_cols: default_x_index = all_cols.index('time') # Added for WFDB
 
             use_index = st.checkbox("Use Row Index as X-Axis", value=True)
             if not use_index: x_axis = st.selectbox("Select X-Axis Column", all_cols, index=default_x_index)
             else: x_axis = df.index.name if df.index.name else "Row Index"
 
-            default_selections = [c for c in ['ecg', 'eda', 'ppg_ir', 'body_temp'] if c in df.columns]
-            selected_columns = st.multiselect("Select Columns to Visualize", options=df.columns, default=default_selections)
+            # Pre-select common columns including standard lead names
+            common_names = ['ecg', 'eda', 'ppg_ir', 'body_temp', 'i', 'ii', 'iii', 'avr', 'avl', 'avf', 'v1', 'v2', 'v3', 'v4', 'v5', 'v6']
+            default_selections = [c for c in common_names if any(x in c.lower() for x in df.columns)]
+            # If nothing matched (e.g. strict naming), fallback to just columns
+            if not default_selections:
+                 default_selections = [c for c in df.columns if any(x in c.lower() for x in common_names)]
+            
+            selected_columns = st.multiselect("Select Columns to Visualize", options=df.columns, default=default_selections[:4]) # Limit default to 4
 
             col_ctrl1, col_ctrl2 = st.columns(2)
             with col_ctrl1: 
@@ -357,20 +269,18 @@ elif app_mode == "Analysis Dashboard":
                     max_value=len(df), 
                     value=(0, min(len(df), 5000)), 
                     step=100,
-                    key="slice_slider" # Key allows detection of change state if needed
+                    key="slice_slider" 
                 )
             with col_ctrl2: 
                 downsample_rate = st.slider("Downsample Rate", min_value=1, max_value=1000, value=1)
 
             if selected_columns:
                 with st.spinner("Generating Plot..."):
-                    # --- PERFORMANCE PROFILING START ---
-                    with PerformanceMonitor() as pm_plot:
+                    with firebase_module.PerformanceMonitor() as pm_plot:
                         df_slice = df.iloc[start_row:end_row]
                         if downsample_rate > 1: df_slice = df_slice.iloc[::downsample_rate, :]
                         fig = go.Figure()
                         
-                        # Track count of valid traces added
                         valid_traces = 0
                         for col in selected_columns:
                             try:
@@ -384,108 +294,119 @@ elif app_mode == "Analysis Dashboard":
                     
                     st.plotly_chart(fig, use_container_width=True)
                     
-                    # --- TELEMETRY LOGGING ---
                     plot_time_ms = pm_plot.duration * 1000
-                    # Calculate total points rendered: (Rows in slice) * (Number of overlaid traces)
                     total_render_points = len(df_slice) * valid_traces
                     
                     st.caption(f"⚡ Plot Gen: {plot_time_ms:.2f} ms | Points: {total_render_points:,} | Signals: {valid_traces}")
                     
                     if current_doc_id:
-                        log_plot_performance(
+                        firebase_module.log_plot_performance(
                             doc_id=current_doc_id,
                             file_name=uploaded_file.name,
                             exec_time_ms=plot_time_ms,
                             total_points=total_render_points,
                             active_traces=valid_traces
                         )
-                    # --- PERFORMANCE PROFILING END ---
 
             st.markdown("---")
             st.subheader("2. Advanced ECG Analysis")
-            with st.expander("Show ECG Analysis Tools", expanded=False):
-                ecg_col_options = [c for c in df.columns if 'ecg' in c.lower()]
+            
+            # --- ADAPTIVE CONFIGURATION SECTION ---
+            with st.expander("⚙️ Analysis Settings", expanded=True):
+                ecg_col_options = [c for c in df.columns if any(x in c.lower() for x in ['ecg', 'i', 'ii', 'v1', 'v2'])]
                 if not ecg_col_options: ecg_col_options = df.columns
+                
                 c1, c2, c3 = st.columns([1, 1, 2])
                 with c1: target_ecg_col = st.selectbox("Select ECG Column", ecg_col_options)
-                with c2: fs_ecg = st.number_input("ECG Sampling Rate (Hz)", value=125, min_value=1)
+                with c2: fs_ecg = st.number_input("ECG Sampling Rate (Hz)", value=500, min_value=1) # Default for PTB-XL is 500
+                with c3:
+                    # Explicit Algorithm Selection
+                    algo_options = {
+                        "Standard (Pan-Tompkins 1985)": "pantompkins1985",
+                        "Adaptive Gradient (NeuroKit)": "neurokit",
+                        "Wavelet (Elgendi 2010)": "elgendi2010",
+                        "Slope (Hamilton 2002)": "hamilton2002"
+                    }
+                    algo_choice = st.selectbox("Peak Detection Algorithm", list(algo_options.keys()), index=1)
+                    selected_method = algo_options[algo_choice]
+            
+            # --- ACTION BUTTONS ---
+            st.write("")
+            btn_col1, btn_col2 = st.columns(2)
+            with btn_col1:
+                run_manual = st.button("Run Analysis (Manual)", type="secondary", use_container_width=True)
+            with btn_col2:
+                run_agentic = st.button("✨ Run Dr. Signal Analysis (Agentic)", type="primary", use_container_width=True)
+
+            if run_manual or run_agentic:
+                raw_data = df.iloc[start_row:end_row][target_ecg_col]
+                analysis_data = pd.to_numeric(raw_data, errors='coerce').dropna()
                 
-                st.write("")
-                st.markdown("### Choose Analysis Mode")
-                
-                btn_col1, btn_col2 = st.columns(2)
-                with btn_col1:
-                    run_manual = st.button("Run Standard Analysis (Manual)", type="secondary", use_container_width=True)
-                with btn_col2:
-                    run_agentic = st.button("✨ Run Dr. Signal Analysis (Agentic)", type="primary", use_container_width=True)
+                if len(analysis_data) < fs_ecg: 
+                    st.error("Not enough valid data in current window.")
+                else:
+                    with st.spinner(f"Processing ECG using {selected_method}..."):
+                        
+                        with firebase_module.PerformanceMonitor() as pm:
+                            # Pass user-selected method to processing function
+                            peaks, heart_rate, sqis, ecg_cleaned = process_ecg(analysis_data, fs_ecg, method=selected_method)
+                        
+                        throughput = len(analysis_data) / pm.duration if pm.duration > 0 else 0
+                        
+                        firebase_module.log_computation_metrics(
+                            doc_id=current_doc_id, 
+                            file_name=uploaded_file.name,
+                            analysis_type="ECG", 
+                            duration_sec=pm.duration, 
+                            memory_mb=pm.memory_used_mb, 
+                            throughput_ksps=throughput/1000
+                        )
 
-                if run_manual or run_agentic:
-                    raw_data = df.iloc[start_row:end_row][target_ecg_col]
-                    analysis_data = pd.to_numeric(raw_data, errors='coerce').dropna()
-                    
-                    if len(analysis_data) < fs_ecg: st.error("Not enough valid data.")
-                    else:
-                        with st.spinner("Processing ECG Signal (Math)..."):
-                            with PerformanceMonitor() as pm:
-                                peaks, heartbeats, sqis, envelope = process_ecg(analysis_data, fs_ecg)
+                        st.markdown("#### ⚙️ System Telemetry")
+                        perf_c1, perf_c2, perf_c3 = st.columns(3)
+                        perf_c1.metric("Execution", f"{pm.duration*1000:.2f} ms")
+                        perf_c2.metric("Throughput", f"{throughput/1000:.1f} kS/s")
+                        perf_c3.metric("Peak RAM", f"{pm.memory_used_mb:.2f} MB")
+
+                        if len(peaks) == 0: 
+                            st.warning(f"No peaks detected using **{selected_method}**. \n\n**Troubleshooting:**\n1. Check if Sampling Rate ({fs_ecg} Hz) matches your device.\n2. Try switching algorithms (e.g., 'Adaptive Gradient').")
+                        else:
+                            if run_agentic:
+                                if agent_active:
+                                    with st.status("🤖 Dr. Signal is analyzing results...", expanded=True):
+                                        st.write("Compiling metrics...")
+                                        avg_sqis = {
+                                            'skew_avg': np.mean(sqis['skewness']),
+                                            'kurt_avg': np.mean(sqis['kurtosis']),
+                                            'psd_avg': np.mean(sqis['psd_ratio'])
+                                        }
+                                        duration = len(analysis_data) / fs_ecg
+                                        st.write("Consulting LLM...")
+                                        report = agent.generate_ecg_report(avg_sqis, len(peaks), duration, fs_ecg)
+                                        st.markdown("### 📋 Dr. Signal's Report")
+                                        st.markdown(report)
+                                else:
+                                    st.error("Agent is offline. Please check API Key.")
+
+                            tab1, tab2, tab3 = st.tabs(["Peak Detection", "Continuous Heart Rate", "SQI Metrics"])
+                            with tab1:
+                                fig_peaks = go.Figure()
+                                fig_peaks.add_trace(go.Scatter(y=ecg_cleaned, name='Cleaned ECG', line=dict(color='gray')))
+                                valid_peaks = peaks[peaks < len(ecg_cleaned)]
+                                fig_peaks.add_trace(go.Scatter(x=valid_peaks, y=ecg_cleaned[valid_peaks], mode='markers', name='R-Peaks', marker=dict(color='red', size=8, symbol='x')))
+                                st.plotly_chart(fig_peaks, use_container_width=True)
                             
-                            throughput = len(analysis_data) / pm.duration if pm.duration > 0 else 0
+                            with tab2:
+                                fig_hr = go.Figure()
+                                fig_hr.add_trace(go.Scatter(y=heart_rate, mode='lines', name='Heart Rate (BPM)', line=dict(color='red', width=2)))
+                                fig_hr.update_layout(title="Continuous Heart Rate (BPM)", xaxis_title="Sample", yaxis_title="BPM")
+                                st.plotly_chart(fig_hr, use_container_width=True)
                             
-                            log_computation_metrics(
-                                doc_id=current_doc_id, 
-                                file_name=uploaded_file.name,
-                                analysis_type="ECG", 
-                                duration_sec=pm.duration, 
-                                memory_mb=pm.memory_used_mb, 
-                                throughput_ksps=throughput/1000
-                            )
-
-                            st.markdown("#### ⚙️ System Telemetry")
-                            perf_c1, perf_c2, perf_c3 = st.columns(3)
-                            perf_c1.metric("Execution", f"{pm.duration*1000:.2f} ms")
-                            perf_c2.metric("Throughput", f"{throughput/1000:.1f} kS/s")
-                            perf_c3.metric("Peak RAM", f"{pm.memory_used_mb:.2f} MB")
-
-                            if len(peaks) == 0: st.warning("No peaks detected.")
-                            else:
-                                if run_agentic:
-                                    if agent_active:
-                                        with st.status("🤖 Dr. Signal is analyzing results...", expanded=True):
-                                            st.write("Compiling metrics...")
-                                            avg_sqis = {
-                                                'skew_avg': np.mean(sqis['skewness']),
-                                                'kurt_avg': np.mean(sqis['kurtosis']),
-                                                'psd_avg': np.mean(sqis['psd_ratio'])
-                                            }
-                                            duration = len(analysis_data) / fs_ecg
-                                            st.write("Consulting LLM...")
-                                            report = agent.generate_ecg_report(avg_sqis, len(peaks), duration, fs_ecg)
-                                            st.markdown("### 📋 Dr. Signal's Report")
-                                            st.markdown(report)
-                                    else:
-                                        st.error("Agent is offline. Please check API Key.")
-
-                                tab1, tab2, tab3 = st.tabs(["Peak Detection", "Morphology", "SQI Metrics"])
-                                with tab1:
-                                    fig_peaks = go.Figure()
-                                    fig_peaks.add_trace(go.Scatter(y=normalize_signal(analysis_data), name='Norm. ECG', line=dict(color='gray')))
-                                    fig_peaks.add_trace(go.Scatter(y=envelope, name='Envelope', line=dict(color='orange', dash='dot')))
-                                    fig_peaks.add_trace(go.Scatter(x=peaks, y=envelope[peaks], mode='markers', name='QRS', marker=dict(color='red', size=8, symbol='x')))
-                                    st.plotly_chart(fig_peaks, use_container_width=True)
-                                with tab2:
-                                    fig_morph = go.Figure()
-                                    beats_arr = np.array(heartbeats)
-                                    mean_beat = np.mean(beats_arr, axis=0)
-                                    t = np.linspace(-0.2, 0.8, len(mean_beat))
-                                    for i in range(min(len(heartbeats), 100)):
-                                        fig_morph.add_trace(go.Scatter(x=t, y=beats_arr[i], mode='lines', line=dict(color='rgba(0,0,0,0.1)'), showlegend=False))
-                                    fig_morph.add_trace(go.Scatter(x=t, y=mean_beat, mode='lines', name='Avg Heartbeat', line=dict(color='red', width=4)))
-                                    st.plotly_chart(fig_morph, use_container_width=True)
-                                with tab3:
-                                    c_sq1, c_sq2, c_sq3 = st.columns(3)
-                                    c_sq1.metric("Skewness", f"{np.mean(sqis['skewness']):.2f}")
-                                    c_sq2.metric("Kurtosis", f"{np.mean(sqis['kurtosis']):.2f}")
-                                    c_sq3.metric("PSD Ratio", f"{np.mean(sqis['psd_ratio']):.2f}")
+                            with tab3:
+                                c_sq1, c_sq2, c_sq3 = st.columns(3)
+                                c_sq1.metric("Skewness", f"{np.mean(sqis['skewness']):.2f}")
+                                c_sq2.metric("Kurtosis", f"{np.mean(sqis['kurtosis']):.2f}")
+                                c_sq3.metric("PSD Ratio", f"{np.mean(sqis['psd_ratio']):.2f}")
 
             st.markdown("---")
             st.subheader("3. Advanced EDA Analysis")

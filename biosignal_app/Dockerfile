@@ -1,5 +1,5 @@
-# Use a lightweight Python base image
-FROM python:3.9-slim
+# Use a lightweight Python base image (Upgraded to 3.10 for neurokit2 compatibility)
+FROM python:3.10-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -35,6 +35,8 @@ COPY gemini_key.txt .
 COPY biosignal_viz.py .
 # Copy the agent logic script - CRITICAL FIX
 COPY agent.py .
+COPY firebase_module.py .
+COPY firestore_export.py .
 
 # Expose Streamlit's default port
 EXPOSE 8501
