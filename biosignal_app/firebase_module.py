@@ -5,6 +5,7 @@ import os
 import tracemalloc
 import re
 import uuid
+import pandas as pd
 from datetime import datetime
 
 import firebase_admin
@@ -69,7 +70,7 @@ def sanitize_document_id(file_name):
     
     return f"{clean_name}_{timestamp}_{short_uuid}"
 
-def create_analysis_session(file_name):
+def create_analysis_session(file_name, session_type="standard_analysis"):
     """Creates a root session document with a readable ID."""
     db = init_firebase()
     if db is None: return None
@@ -83,6 +84,7 @@ def create_analysis_session(file_name):
             'session_start': firestore.SERVER_TIMESTAMP,
             'timestamp_iso': datetime.now().isoformat(), # CSV Friendly
             'status': 'active',
+            'session_type': session_type,
             'user_agent_mode': 'streamlit_standard'
         })
         return custom_doc_id
@@ -149,3 +151,43 @@ def log_computation_metrics(doc_id, file_name, analysis_type, duration_sec, memo
         db.collection('analysis_logs').document(doc_id).collection('computation_metrics').add(perf_data)
     except Exception as e:
         print(f"Error logging comp metrics: {e}")
+
+def fetch_benchmark_results(session_id):
+    """
+    Fetches computation and plot metrics for a session and returns a flattened DataFrame.
+    """
+    db = init_firebase()
+    if db is None or not session_id: return None
+    
+    try:
+        # 1. Fetch Computation Metrics & Sort by Timestamp (to align trials)
+        comp_ref = db.collection('analysis_logs').document(session_id).collection('computation_metrics')
+        comp_docs = comp_ref.stream()
+        comp_data = sorted([d.to_dict() for d in comp_docs], key=lambda x: x.get('timestamp', 0))
+        
+        # 2. Fetch Plot Performance & Sort by Timestamp
+        plot_ref = db.collection('analysis_logs').document(session_id).collection('plot_performance')
+        plot_docs = plot_ref.stream()
+        plot_data = sorted([d.to_dict() for d in plot_docs], key=lambda x: x.get('timestamp', 0))
+        
+        if not comp_data:
+            return None
+
+        df_comp = pd.DataFrame(comp_data)
+        
+        if plot_data:
+            df_plot = pd.DataFrame(plot_data)
+            
+            # Select only relevant columns to add (avoid duplicate metadata like file_name/session_id)
+            cols_to_add = [c for c in ['plot_gen_time_ms', 'total_points_rendered', 'active_trace_count'] if c in df_plot.columns]
+            
+            if cols_to_add:
+                df_plot_clean = df_plot[cols_to_add]
+                # Merge horizontally based on sorted order (assuming 1:1 consistent logging)
+                df_comp = pd.concat([df_comp.reset_index(drop=True), df_plot_clean.reset_index(drop=True)], axis=1)
+
+        return df_comp
+        
+    except Exception as e:
+        print(f"Error fetching results: {e}")
+        return None
