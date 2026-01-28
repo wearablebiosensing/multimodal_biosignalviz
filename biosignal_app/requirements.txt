@@ -4,6 +4,7 @@ numpy
 plotly
 scipy
 firebase-admin
+firebase-admin
 google-generativeai>=0.7.0
 neurokit2
 wfdb
