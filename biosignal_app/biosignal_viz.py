@@ -290,6 +290,9 @@ elif app_mode == "Analysis Dashboard":
                 st.session_state.current_file_id = uploaded_file.file_id
                 st.session_state.firebase_doc_id = session_id
                 st.session_state.annotations = []
+                # Initialize slice range
+                st.session_state.start_row = 0
+                st.session_state.end_row = min(len(df), 5000)
                 if session_id: 
                     firebase_module.log_visualization_metrics(session_id, df, uploaded_file)
                     st.toast(f"Tracking ID: {session_id}", icon="🔥")
@@ -324,7 +327,39 @@ elif app_mode == "Analysis Dashboard":
 
             col_ctrl1, col_ctrl2, col_ctrl3 = st.columns(3)
             with col_ctrl1: 
-                start_row, end_row = st.slider("Select Row Range", 0, len(df), (0, min(len(df), 5000)), step=100)
+                # Ensure session state exists
+                if 'start_row' not in st.session_state: st.session_state.start_row = 0
+                if 'end_row' not in st.session_state: st.session_state.end_row = min(len(df), 5000)
+
+                # Slider for manual adjustment
+                slice_range = st.slider(
+                    "Select Row Range", 
+                    0, len(df), 
+                    (st.session_state.start_row, st.session_state.end_row), 
+                    step=100
+                )
+                st.session_state.start_row, st.session_state.end_row = slice_range
+                
+                # Navigation Buttons
+                btn_prev, btn_next = st.columns(2)
+                window_size = st.session_state.end_row - st.session_state.start_row
+                
+                if btn_prev.button("⬅️ Previous", use_container_width=True):
+                    new_start = max(0, st.session_state.start_row - window_size)
+                    st.session_state.start_row = new_start
+                    st.session_state.end_row = new_start + window_size
+                    st.rerun()
+                
+                if btn_next.button("Next ➡️", use_container_width=True):
+                    new_start = min(len(df) - window_size, st.session_state.start_row + window_size)
+                    # Ensure start doesn't exceed bounds if window is larger than remaining data
+                    if new_start < 0: new_start = 0
+                    st.session_state.start_row = new_start
+                    st.session_state.end_row = min(len(df), new_start + window_size)
+                    st.rerun()
+
+                start_row, end_row = st.session_state.start_row, st.session_state.end_row
+
             with col_ctrl2: downsample_rate = st.slider("Downsample", 1, 100, 1)
             with col_ctrl3: view_mode = st.radio("View Mode", ["Overlay", "Stacked"], horizontal=True)
 
@@ -440,18 +475,35 @@ elif app_mode == "Analysis Dashboard":
                     st.caption(f"⚡ Plot Gen: {pm_plot.duration*1000:.2f} ms | Points: {len(df_slice)*valid_traces:,}")
 
             st.markdown("---")
-            st.subheader("2. Advanced ECG Analysis")
+            st.subheader("3. Advanced ECG Analysis")
             with st.expander("⚙️ Settings", expanded=True):
                 ecg_opts = [c for c in df.columns if any(x in c.lower() for x in ['ecg', 'i', 'ii', 'mlii', 'v1'])]
                 tgt_col = st.selectbox("ECG Column", ecg_opts if ecg_opts else df.columns)
                 fs_ecg = st.number_input("Fs (Hz)", value=int(detected_fs) if detected_fs else 500)
                 algo = st.selectbox("Algorithm", ["pantompkins1985", "neurokit", "elgendi2010"], index=1)
                 invert = st.checkbox("Invert Signal")
+                
+                # DATA RANGE SELECTOR
+                analysis_range = st.radio(
+                    "Select Analysis Scope", 
+                    ["Current View (Selected Chunk)", "Full Dataset"], 
+                    horizontal=True,
+                    help="Choose whether to process only the points visible in the slider/chunk selection or the entire file."
+                )
 
             if st.button("Run ECG Analysis"):
-                seg = pd.to_numeric(df[tgt_col].iloc[start_row:end_row], errors='coerce').dropna()
+                # Determine data to process based on user choice
+                if analysis_range == "Current View (Selected Chunk)":
+                    seg_data = df[tgt_col].iloc[start_row:end_row]
+                    scope_desc = f"chunk {start_row}-{end_row}"
+                else:
+                    seg_data = df[tgt_col]
+                    scope_desc = "full dataset"
+                
+                seg = pd.to_numeric(seg_data, errors='coerce').dropna()
+                
                 if len(seg) >= fs_ecg:
-                    with st.spinner("Processing..."):
+                    with st.spinner(f"Processing {scope_desc}..."):
                         with firebase_module.PerformanceMonitor() as pm:
                             peaks, hr, sqis, clean = process_ecg(seg, fs_ecg, method=algo, invert=invert)
                         
@@ -470,6 +522,9 @@ elif app_mode == "Analysis Dashboard":
                             f2 = go.Figure()
                             f2.add_trace(go.Scattergl(y=hr, name='Heart Rate (BPM)', line=dict(color='red')))
                             st.plotly_chart(f2, use_container_width=True)
+                else:
+                    st.error(f"Signal segment too short ({len(seg)} samples) for analysis at {fs_ecg}Hz.")
+
     else:
         st.info("Waiting for file upload...")
 
