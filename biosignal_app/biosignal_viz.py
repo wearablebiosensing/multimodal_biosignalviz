@@ -16,6 +16,7 @@ import shutil
 import time
 import traceback
 import uuid
+import gc
 
 # Agent Import
 # import agent
@@ -475,7 +476,7 @@ elif app_mode == "Analysis Dashboard":
                     st.caption(f"⚡ Plot Gen: {pm_plot.duration*1000:.2f} ms | Points: {len(df_slice)*valid_traces:,}")
 
             st.markdown("---")
-            st.subheader("3. Advanced ECG Analysis")
+            st.subheader("2. Advanced ECG Analysis")
             with st.expander("⚙️ Settings", expanded=True):
                 ecg_opts = [c for c in df.columns if any(x in c.lower() for x in ['ecg', 'i', 'ii', 'mlii', 'v1'])]
                 tgt_col = st.selectbox("ECG Column", ecg_opts if ecg_opts else df.columns)
@@ -534,9 +535,9 @@ elif app_mode == "Evaluation Experiment":
     dataset_path = None
     
     if source_type == "Local Path":
-        dataset_path = st.text_input("Local Path", placeholder="/path/to/mitbih").strip()
+        dataset_path = st.text_input("Local Path", placeholder="/path/to/dataset").strip()
     else: 
-        uploaded_files = st.file_uploader("Upload WFDB Folder Content", accept_multiple_files=True)
+        uploaded_files = st.file_uploader("Upload Data Files (CSV or WFDB Folder Content)", accept_multiple_files=True)
         if uploaded_files:
             if 'eval_temp_dir' not in st.session_state: st.session_state.eval_temp_dir = tempfile.mkdtemp()
             for uf in uploaded_files:
@@ -547,42 +548,130 @@ elif app_mode == "Evaluation Experiment":
         if 'eval_files' not in st.session_state: st.session_state.eval_files = []
         if st.button("Scan Directory"):
             found = []
-            for f in os.listdir(dataset_path):
+            files = os.listdir(dataset_path)
+            # Support for both WFDB (.hea) and MindGame (.csv)
+            for f in files:
                 if f.endswith('.hea'):
                     rec = f.replace('.hea', '')
                     try:
                         h = wfdb.rdheader(os.path.join(dataset_path, rec))
-                        found.append({'file': rec, 'path': os.path.join(dataset_path, rec), 'duration_min': (h.sig_len/h.fs)/60, 'fs': h.fs, 'n_sig': h.n_sig})
+                        found.append({
+                            'file': rec, 
+                            'path': os.path.join(dataset_path, rec), 
+                            'type': 'WFDB',
+                            'duration_min': (h.sig_len/h.fs)/60, 
+                            'samples': h.sig_len,
+                            'n_sig': h.n_sig
+                        })
                     except: pass
+                elif f.endswith('.csv'):
+                    try:
+                        f_path = os.path.join(dataset_path, f)
+                        # Metadata read
+                        df_tmp = pd.read_csv(f_path, nrows=2)
+                        found.append({
+                            'file': f,
+                            'path': f_path,
+                            'type': 'CSV',
+                            'duration_min': 0, 
+                            'samples': 0, 
+                            'n_sig': len(df_tmp.columns)
+                        })
+                    except: pass
+            
             st.session_state.eval_files = found
-            st.success(f"Found {len(found)} records")
+            if not found:
+                st.warning("No compatible records found. Ensure you uploaded .csv files or .hea/.dat pairs.")
+            else:
+                st.success(f"Found {len(found)} records (CSV and WFDB supported).")
 
         if st.session_state.eval_files:
             st.subheader("⚙️ Benchmark Settings")
             c1, c2, c3 = st.columns(3)
-            with c1: n_trials = st.number_input("Trials", 1, 20, 5)
-            with c2: n_ch = st.number_input("Channels", 1, 10, 1)
-            with c3: max_p = st.number_input("Max Points", 0, 1000000, 0)
+            with c1: n_trials = st.number_input("Trials per File", 1, 20, 5)
+            with c2: n_ch = st.number_input("Channels to Render", 1, 20, 1)
+            with c3: max_p = st.number_input("Max Points (0=All)", 0, 1000000, 0)
 
             if st.button("🚀 Start Benchmark"):
                 sid = firebase_module.create_analysis_session("BENCHMARK", "evaluation_experiment")
                 pb = st.progress(0)
+                status = st.empty()
                 files = st.session_state.eval_files
+                total_ops = len(files) * n_trials
+                curr_op = 0
+                
                 for i, f_info in enumerate(files):
+                    # --- OPTIMIZATION: LOAD DATA ONCE PER FILE ---
+                    try:
+                        status.write(f"Preparing data for {f_info['file']}...")
+                        t_load_start = time.perf_counter()
+                        if f_info['type'] == 'WFDB':
+                            record, _ = wfdb.rdsamp(f_info['path'])
+                            data_block = record
+                        else:
+                            # Use engine='c' and low_memory for better stability on large files
+                            df_bench = pd.read_csv(f_info['path'], engine='c', low_memory=False)
+                            data_block = df_bench.select_dtypes(include=[np.number]).values
+                            del df_bench # Explicitly free memory
+                            gc.collect() # Trigger garbage collection for large files
+                        t_load = time.perf_counter() - t_load_start
+                    except Exception as e:
+                        st.error(f"Failed to load {f_info['file']}: {str(e)}")
+                        curr_op += n_trials # Skip trials
+                        pb.progress(curr_op / total_ops)
+                        continue
+
+                    # Benchmark Trials (Visualization Latency)
                     for t in range(n_trials):
                         try:
-                            t0 = time.perf_counter()
-                            record, _ = wfdb.rdsamp(f_info['path'])
-                            t_load = time.perf_counter() - t0
+                            status.write(f"Benchmarking {f_info['file']} (Trial {t+1}/{n_trials})")
                             
+                            # RENDERING BENCHMARK
                             t1 = time.perf_counter()
                             fig = go.Figure()
-                            y = record[:max_p, 0] if max_p > 0 else record[:, 0]
-                            fig.add_trace(go.Scatter(y=y, mode='lines'))
-                            t_plot = time.perf_counter() - t1
+                            end_idx = max_p if (max_p > 0 and max_p < len(data_block)) else len(data_block)
+                            actual_ch = min(n_ch, data_block.shape[1])
                             
-                            firebase_module.log_computation_metrics(sid, f_info['file'], "benchmark", t_load+t_plot, 0, (len(y)/(t_load+t_plot))/1000)
-                            firebase_module.log_plot_performance(sid, f_info['file'], t_plot*1000, len(y), 1)
-                        except: pass
-                    pb.progress((i+1)/len(files))
+                            for ch_idx in range(actual_ch):
+                                y = data_block[:end_idx, ch_idx]
+                                fig.add_trace(go.Scatter(y=y, mode='lines'))
+                                
+                            t_plot = time.perf_counter() - t1
+                            total_points = end_idx * actual_ch
+                            
+                            # LOGGING
+                            firebase_module.log_computation_metrics(
+                                sid, f_info['file'], f"bench_{f_info['type']}", 
+                                t_load + t_plot, 0, (total_points / (t_load + t_plot)) / 1000
+                            )
+                            firebase_module.log_plot_performance(
+                                sid, f_info['file'], t_plot * 1000, total_points, actual_ch
+                            )
+                        except Exception as e:
+                            st.error(f"Error on {f_info['file']} trial {t}: {str(e)}")
+                        
+                        curr_op += 1
+                        pb.progress(curr_op / total_ops)
+                    
+                    # Cleanup after all trials for this file
+                    del data_block
+                    gc.collect()
+                
+                status.write("Benchmark Complete.")
                 st.success("Benchmark Finished")
+                st.balloons()
+                
+                # --- DOWNLOAD LOGIC RESTORED ---
+                with st.spinner("Preparing Results CSV..."):
+                    df_results = firebase_module.fetch_benchmark_results(sid)
+                    if df_results is not None and not df_results.empty:
+                        csv = df_results.to_csv(index=False).encode('utf-8')
+                        st.download_button(
+                            label="📥 Download Benchmark Results (CSV)",
+                            data=csv,
+                            file_name=f"benchmark_results_{sid}.csv",
+                            mime="text/csv",
+                            type="primary"
+                        )
+                    else:
+                        st.warning("No results found to download. Verify Firestore connection.")
