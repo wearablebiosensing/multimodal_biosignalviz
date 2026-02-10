@@ -150,13 +150,47 @@ def delete_annotation(session_id, ann_id):
             db.collection('analysis_logs').document(session_id).collection('annotations').document(ann_id).delete()
         except: pass
 
-def merge_annotations(df, annotations, x_col, use_index):
+def merge_annotations(df, annotations, x_col, use_index, fs=1):
     merged = df.copy()
     merged['event_label'] = None
+    merged['event_type'] = None
+    merged['event_notes'] = None
+    
     for ann in annotations:
-        start, end = ann['start_time'], ann['end_time']
-        mask = (merged.index >= start) & (merged.index <= end) if use_index else (merged[x_col] >= start) & (merged[x_col] <= end)
-        if mask.any(): merged.loc[mask, 'event_label'] = ann['label']
+        ann_type = ann.get('type', 'Interval')
+        s_idx = ann.get('sample_idx')
+        if s_idx is None:
+            s_idx = int(ann['start_time'] * fs)
+        e_idx = int(ann['end_time'] * fs) if ann_type == 'Interval' else s_idx
+
+        mask = None
+        if use_index:
+            if ann_type == 'Instantaneous':
+                if 0 <= s_idx < len(merged): mask = merged.index == s_idx
+            else:
+                mask = (merged.index >= s_idx) & (merged.index <= e_idx)
+        else:
+            start_val = ann['start_time']
+            end_val = ann['end_time']
+            if ann_type == 'Instantaneous':
+                try:
+                    if pd.api.types.is_numeric_dtype(merged[x_col]):
+                        idx = (merged[x_col] - start_val).abs().idxmin()
+                        mask = merged.index == idx
+                    else: mask = merged[x_col] == start_val
+                except: pass
+            else:
+                mask = (merged[x_col] >= start_val) & (merged[x_col] <= end_val)
+        
+        if mask is not None and (mask.any() if hasattr(mask, 'any') else mask is not None):
+            def append_str(current, new):
+                if pd.isna(current) or current == "" or current is None: return new
+                if new in str(current): return current
+                return f"{current}; {new}"
+            merged.loc[mask, 'event_label'] = merged.loc[mask, 'event_label'].apply(lambda x: append_str(x, ann['label']))
+            merged.loc[mask, 'event_type'] = merged.loc[mask, 'event_type'].apply(lambda x: append_str(x, ann['type']))
+            if ann.get('notes'):
+                merged.loc[mask, 'event_notes'] = merged.loc[mask, 'event_notes'].apply(lambda x: append_str(x, ann['notes']))
     return merged
 
 # -----------------------------------------------------------------------------
@@ -170,7 +204,14 @@ with st.sidebar:
     app_mode = st.radio("Select Mode", ["Analysis Dashboard", "CSV Concatenator (Prep)", "Evaluation Experiment"])
     st.markdown("---")
 
-if app_mode == "Analysis Dashboard":
+if app_mode == "CSV Concatenator (Prep)":
+    st.header("📂 Preprocessing: Concatenate CSV Files")
+    uploaded_files = st.file_uploader("Upload CSV files", type=['csv'], accept_multiple_files=True)
+    if uploaded_files:
+        if st.button("Concatenate Files", type="primary"):
+            st.warning("Concatenation logic placeholder.")
+
+elif app_mode == "Analysis Dashboard":
     if 'custom_labels' not in st.session_state: st.session_state.custom_labels = []
 
     with st.sidebar:
@@ -179,6 +220,7 @@ if app_mode == "Analysis Dashboard":
 
     if uploaded_file is not None:
         df, detected_fs, native_anns = load_data(uploaded_file)
+        fs_val = detected_fs if detected_fs else 1
         
         if df is not None:
             if 'current_file_id' not in st.session_state or st.session_state.current_file_id != uploaded_file.name:
@@ -232,81 +274,95 @@ if app_mode == "Analysis Dashboard":
                         s_data = json.load(stress_file); injected = []
                         for item in s_data:
                             at = "Instantaneous" if item.get("type") == "point" else "Interval"
-                            injected.append({"label": item.get("label", "Stress_Test"), "type": at, "start_time": item.get("time", item.get("start")), "end_time": item.get("time", item.get("end")), "notes": "Stress Test"})
+                            injected.append({"label": item.get("label", "Stress_Test"), "type": at, "start_time": item.get("time", item.get("start")), "end_time": item.get("time", item.get("end")), "notes": "Stress Test Injection"})
                         st.session_state.stress_test_annotations = injected; st.success("Loaded Stress Test!")
                     except Exception as e: st.error(f"Error: {e}")
 
                 ac1, ac2, ac3, ac4, ac5 = st.columns([1.5, 1, 1, 1.5, 1])
                 with ac2: ann_type = st.selectbox("Type", ["Interval", "Instantaneous"])
                 with ac1: ann_label = st.selectbox("Event Label", list(dict.fromkeys(st.session_state.custom_labels + ["Noise", "Artifact", "Arrhythmia", "R-wave"])))
-                cur_x_start = start_row / (detected_fs or 1)
-                with ac3: ann_start = st.number_input("Start (sec)", value=float(cur_x_start))
-                with ac4: ann_end = st.number_input("End (sec)", value=float(cur_x_start + 1), disabled=(ann_type=="Instantaneous"))
+                
+                unit_label = "(Samples)" if use_index else "(sec)"
+                def_start = start_row if use_index else (start_row / fs_val)
+                def_end = end_row if use_index else (end_row / fs_val)
+                
+                with ac3: ann_start_input = st.number_input(f"Start {unit_label}", value=float(def_start))
+                with ac4: ann_end_input = st.number_input(f"End {unit_label}", value=float(def_end), disabled=(ann_type=="Instantaneous"))
                 with ac5: st.write(""); add_btn = st.button("➕ Add Event")
                 
                 notes = st.text_area("Notes")
                 if add_btn and ann_label:
-                    s_idx = int(ann_start * (detected_fs or 1))
-                    if save_annotation(current_doc_id, ann_start, ann_end if ann_type=="Interval" else ann_start, ann_label, notes, ann_type, sample_idx=s_idx):
+                    if use_index:
+                        ann_start_sec, ann_end_sec = ann_start_input / fs_val, ann_end_input / fs_val
+                        s_idx = int(ann_start_input)
+                    else:
+                        ann_start_sec, ann_end_sec = ann_start_input, ann_end_input
+                        s_idx = int(ann_start_input * fs_val)
+                    if save_annotation(current_doc_id, ann_start_sec, ann_end_sec if ann_type=="Interval" else ann_start_sec, ann_label, notes, ann_type, sample_idx=s_idx):
                         st.success(f"Added {ann_label}"); time.sleep(0.5); st.rerun()
 
                 if db_anns:
-                    st.dataframe(pd.DataFrame(db_anns)[['label', 'type', 'start_time', 'end_time']], use_container_width=True, height=150)
+                    df_db_anns = pd.DataFrame(db_anns)
+                    st.dataframe(df_db_anns[['label', 'type', 'start_time', 'end_time']], use_container_width=True, height=150)
                     del_id = st.selectbox("Delete Entry", [a['id'] for a in db_anns], format_func=lambda x: f"ID: {x[-6:]}")
                     if st.button("Confirm Delete"): delete_annotation(current_doc_id, del_id); st.rerun()
+                
+                st.markdown("---")
+                st.write("**Export Data**")
+                col_export_1, col_export_2 = st.columns(2)
+                with col_export_1:
+                    if db_anns:
+                        csv_anns = pd.DataFrame(db_anns).to_csv(index=False).encode('utf-8')
+                        st.download_button("📥 Download Annotations (CSV)", csv_anns, f"annotations_{current_doc_id}.csv", "text/csv", use_container_width=True)
+                with col_export_2:
+                    if st.checkbox("Prepare Merged Dataset (ML)"):
+                        with st.spinner("Merging..."):
+                            merged_df = merge_annotations(df, db_anns, x_axis, use_index, fs=fs_val)
+                            csv_merged = merged_df.to_csv(index=use_index).encode('utf-8')
+                            st.download_button("📦 Download Merged Dataset (CSV)", csv_merged, f"merged_{current_doc_id}.csv", "text/csv", type="primary", use_container_width=True)
 
-            # --- PLOTTING LOGIC WITH LEGEND & DASHED LINES ---
+            # --- PLOTTING LOGIC ---
             if selected_columns:
                 with st.spinner("Rendering Plot..."):
                     with firebase_module.PerformanceMonitor() as pm:
                         df_slice = df.iloc[start_row:end_row:downsample_rate]
                         x_data = df_slice.index if use_index else df_slice[x_axis]
-
                         fig = make_subplots(rows=len(selected_columns), cols=1, shared_xaxes=True, vertical_spacing=0.05) if view_mode == "Stacked" else go.Figure()
-                        
                         for i, col in enumerate(selected_columns):
                             trace = go.Scattergl(x=x_data, y=df_slice[col], mode='lines', name=col)
                             if view_mode == "Stacked": fig.add_trace(trace, row=i+1, col=1)
                             else: fig.add_trace(trace)
 
-                        # Annotation Color Map & Legend Proxies
                         plot_anns = [a for a in all_current_anns if a['label'] in selected_labels]
-                        px_colors = px.colors.qualitative.Prism
-                        color_map = {lbl: px_colors[i % len(px_colors)] for i, lbl in enumerate(selected_labels)}
-                        
-                        # Add Legend Proxy Traces (Invisible points just for the legend)
+                        px_colors = px.colors.qualitative.Alphabet 
+                        color_map = {lbl: px_colors[idx % len(px_colors)] for idx, lbl in enumerate(selected_labels)}
                         for lbl in selected_labels:
-                            fig.add_trace(go.Scatter(
-                                x=[None], y=[None], mode='markers',
-                                marker=dict(color=color_map[lbl], size=10, symbol='square'),
-                                name=f"Event: {lbl}", showlegend=True, legendgroup="Annotations"
-                            ))
+                            fig.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color=color_map[lbl], size=12, symbol='square'), name=f"Event: {lbl}", showlegend=True, legendgroup="Annotations"))
 
                         for ann in plot_anns:
-                            s_idx = ann.get('sample_idx', int(ann['start_time'] * (detected_fs or 1)))
-                            if start_row <= s_idx <= end_row:
-                                x_pos = s_idx if use_index else (s_idx / (detected_fs or 1))
+                            s_idx = ann.get('sample_idx', int(ann['start_time'] * fs_val))
+                            e_idx = int(ann['end_time'] * fs_val) if ann.get('type') == 'Interval' else s_idx
+                            if max(s_idx, start_row) <= min(e_idx, end_row):
+                                x_pos = s_idx if use_index else (s_idx / fs_val)
                                 color = color_map.get(ann['label'], "gray")
-                                
                                 if ann.get('type') == 'Instantaneous':
-                                    # Restore Vertical Dashed Line
-                                    fig.add_vline(x=x_pos, line_width=1.5, line_dash="dash", line_color=color, opacity=0.8)
-                                    # Add Marker for interaction/hover
+                                    fig.add_vline(x=x_pos, line_width=1.5, line_dash="dash", line_color=color, opacity=0.9)
                                     try: y_max = df_slice[selected_columns[0]].max()
                                     except: y_max = 0
-                                    fig.add_trace(go.Scattergl(
-                                        x=[x_pos], y=[y_max], mode='markers', 
-                                        marker=dict(color=color, size=10, symbol='diamond-tall'),
-                                        hoverinfo='text', text=f"{ann['label']}: {ann.get('notes', '')}",
-                                        showlegend=False
-                                    ))
+                                    fig.add_trace(go.Scattergl(x=[x_pos], y=[y_max], mode='markers', marker=dict(color=color, size=12, symbol='diamond-tall'), hoverinfo='text', text=f"{ann['label']}: {ann.get('notes', '')}", showlegend=False))
                                 else:
-                                    # Restore Interval Box
-                                    e_idx = int(ann['end_time'] * (detected_fs or 1))
-                                    x_end = e_idx if use_index else (e_idx / (detected_fs or 1))
-                                    fig.add_vrect(x0=x_pos, x1=x_end, fillcolor=color, opacity=0.2, layer="below", line_width=0)
+                                    x_end = e_idx if use_index else (e_idx / fs_val)
+                                    fig.add_vrect(x0=x_pos, x1=x_end, fillcolor=color, opacity=0.3, layer="below", line_width=0, row="all" if view_mode == "Stacked" else None)
 
-                        fig.update_layout(height=400*len(selected_columns) if view_mode == "Stacked" else 600, template="plotly_white", legend=dict(groupclick="toggleitem"))
+                        dynamic_x_title = "Samples (N)" if use_index else (x_axis if not use_index else "Time")
+                        medical_keywords = ['ecg', 'mlii', 'v1', 'eda', 'ppg']
+                        is_medical = any(any(k in col.lower() for k in medical_keywords) for col in selected_columns)
+                        dynamic_y_title = "Amplitude (mV)" if is_medical else "Magnitude"
+                        fig.update_layout(height=400*len(selected_columns) if view_mode == "Stacked" else 600, template="plotly_white", legend=dict(groupclick="toggleitem", font=dict(size=16), itemsizing='constant'), xaxis_title=dict(text=dynamic_x_title, font=dict(size=18)), yaxis_title=dict(text=dynamic_y_title, font=dict(size=18)) if view_mode == "Overlay" else None, font=dict(size=14), margin=dict(t=50))
+                        fig.update_xaxes(title_font=dict(size=18), tickfont=dict(size=14))
+                        fig.update_yaxes(title_font=dict(size=18), tickfont=dict(size=14))
+                        if view_mode == "Stacked":
+                            for i in range(len(selected_columns)): fig.update_yaxes(title_text=dynamic_y_title, row=i+1, col=1, title_font=dict(size=18))
                         st.plotly_chart(fig, use_container_width=True)
                         st.caption(f"⚡ Plot Gen: {pm.duration*1000:.2f} ms")
 
@@ -315,38 +371,115 @@ if app_mode == "Analysis Dashboard":
             with st.expander("ECG Settings"):
                 tgt = st.selectbox("ECG Col", [c for c in df.columns if any(x in c.lower() for x in ['ecg', 'mlii', 'v1'])] or df.columns)
                 if st.button("Run Analysis"):
-                    peaks, hr, _, clean = process_ecg(df[tgt].iloc[start_row:end_row], detected_fs or 500)
+                    peaks, hr, _, clean = process_ecg(df[tgt].iloc[start_row:end_row], fs_val)
                     f1 = go.Figure(); f1.add_trace(go.Scattergl(y=clean, name='Signal', line_color='gray'))
                     f1.add_trace(go.Scattergl(x=peaks, y=clean[peaks], mode='markers', name='R-Peaks', marker_color='red'))
                     st.plotly_chart(f1, use_container_width=True)
 
+# -----------------------------------------------------------------------------
+# RESTORED: Evaluation Benchmarking
+# -----------------------------------------------------------------------------
 elif app_mode == "Evaluation Experiment":
     st.header("🧪 Experiment: Visualization Latency Benchmark")
-    uploaded_files = st.file_uploader("Upload Data Files", accept_multiple_files=True)
-    if uploaded_files:
-        temp_dir = tempfile.mkdtemp()
-        for uf in uploaded_files:
-            p = os.path.join(temp_dir, uf.name); os.makedirs(os.path.dirname(p), exist_ok=True)
-            with open(p, "wb") as f: f.write(uf.getbuffer())
-        
-        found = []
-        for root, _, files in os.walk(temp_dir):
-            for f in files:
-                if f.endswith('.hea'):
-                    rec = os.path.join(root, f.replace('.hea', ''))
-                    try:
-                        h = wfdb.rdheader(rec)
-                        found.append({'file': f, 'path': rec, 'type': 'WFDB', 'samples': h.sig_len})
-                    except: pass
-        
-        if st.button("🚀 Run Benchmark"):
-            sid = firebase_module.create_analysis_session("BENCHMARK")
-            pb = st.progress(0)
-            for i, f in enumerate(found):
-                t1 = time.perf_counter()
-                data, _ = wfdb.rdsamp(f['path'])
-                fig = go.Figure(); fig.add_trace(go.Scatter(y=data[:10000, 0]))
-                dur = (time.perf_counter() - t1) * 1000
-                firebase_module.log_plot_performance(sid, f['file'], dur, 10000, 1)
-                pb.progress((i+1)/len(found))
-            st.success("Benchmark Complete!")
+    source_type = st.radio("Data Source", ["Local Path", "File Upload"], horizontal=True)
+    dataset_path = None
+    
+    if source_type == "Local Path":
+        dataset_path = st.text_input("Local Path", placeholder="/path/to/dataset").strip()
+    else: 
+        uploaded_files = st.file_uploader("Upload Data Files (CSV or WFDB Folder Content)", accept_multiple_files=True)
+        if uploaded_files:
+            if 'eval_temp_dir' not in st.session_state: st.session_state.eval_temp_dir = tempfile.mkdtemp()
+            for uf in uploaded_files:
+                save_path = os.path.join(st.session_state.eval_temp_dir, uf.name)
+                os.makedirs(os.path.dirname(save_path), exist_ok=True)
+                with open(save_path, "wb") as f: f.write(uf.getbuffer())
+            dataset_path = st.session_state.eval_temp_dir
+
+    if dataset_path and os.path.exists(dataset_path):
+        if 'eval_files' not in st.session_state: st.session_state.eval_files = []
+        if st.button("Scan Directory"):
+            found = []
+            for root, dirs, files in os.walk(dataset_path):
+                for f in files:
+                    if f.endswith('.hea'):
+                        rec_name = f.replace('.hea', '')
+                        rec_path = os.path.join(root, rec_name)
+                        try:
+                            h = wfdb.rdheader(rec_path)
+                            found.append({
+                                'file': rec_name, 'path': rec_path, 'type': 'WFDB',
+                                'duration_min': (h.sig_len/h.fs)/60 if h.fs else 0, 
+                                'samples': h.sig_len, 'n_sig': h.n_sig
+                            })
+                        except: pass
+                    elif f.endswith('.csv'):
+                        try:
+                            f_path = os.path.join(root, f)
+                            df_tmp = pd.read_csv(f_path, nrows=2)
+                            found.append({
+                                'file': f, 'path': f_path, 'type': 'CSV',
+                                'duration_min': 0, 'samples': 0, 'n_sig': len(df_tmp.columns)
+                            })
+                        except: pass
+            st.session_state.eval_files = found
+            st.success(f"Found {len(found)} records (CSV and WFDB supported).")
+
+        if st.session_state.eval_files:
+            st.subheader("⚙️ Benchmark Settings")
+            with st.expander("📂 File Filtering", expanded=True):
+                filter_term = st.text_input("Filter files by name substring", "")
+                filtered_files = [f for f in st.session_state.eval_files if filter_term.lower() in f['file'].lower()]
+                st.write(f"**Status:** {len(filtered_files)} files selected.")
+
+            c1, c2, c3 = st.columns(3)
+            with c1: n_trials = st.number_input("Trials per File", 1, 20, 5)
+            with c2: n_ch = st.number_input("Channels to Render", 1, 20, 1)
+            with c3: max_p = st.number_input("Max Points (0=All)", 0, 1000000, 0)
+
+            if st.button("🚀 Start Benchmark"):
+                if not filtered_files:
+                    st.error("No files match filter.")
+                else:
+                    sid = firebase_module.create_analysis_session("BENCHMARK", "evaluation_experiment")
+                    pb = st.progress(0); status = st.empty()
+                    total_ops = len(filtered_files) * n_trials; curr_op = 0
+                    
+                    for f_info in filtered_files:
+                        try:
+                            status.write(f"Preparing data for {f_info['file']}...")
+                            t_load_start = time.perf_counter()
+                            if f_info['type'] == 'WFDB':
+                                record, _ = wfdb.rdsamp(f_info['path'])
+                                data_block = record
+                            else:
+                                df_bench = pd.read_csv(f_info['path'], engine='c', low_memory=False)
+                                data_block = df_bench.select_dtypes(include=[np.number]).values
+                                del df_bench; gc.collect()
+                            t_load = time.perf_counter() - t_load_start
+                            
+                            for t in range(n_trials):
+                                status.write(f"Benchmarking {f_info['file']} (Trial {t+1}/{n_trials})")
+                                t1 = time.perf_counter()
+                                fig = go.Figure()
+                                end_idx = max_p if (max_p > 0 and max_p < len(data_block)) else len(data_block)
+                                actual_ch = min(n_ch, data_block.shape[1])
+                                for ch_idx in range(actual_ch):
+                                    fig.add_trace(go.Scatter(y=data_block[:end_idx, ch_idx], mode='lines'))
+                                t_plot = time.perf_counter() - t1
+                                total_p = end_idx * actual_ch
+                                
+                                firebase_module.log_computation_metrics(sid, f_info['file'], f"bench_{f_info['type']}", t_load + t_plot, 0, (total_p / (t_load + t_plot)) / 1000)
+                                firebase_module.log_plot_performance(sid, f_info['file'], t_plot * 1000, total_p, actual_ch)
+                                curr_op += 1; pb.progress(curr_op / total_ops)
+                            
+                            del data_block; gc.collect()
+                        except Exception as e:
+                            st.error(f"Error on {f_info['file']}: {str(e)}")
+                            curr_op += n_trials; pb.progress(min(1.0, curr_op / total_ops))
+                    
+                    st.success("Benchmark Finished"); st.balloons()
+                    with st.spinner("Preparing Results CSV..."):
+                        df_results = firebase_module.fetch_benchmark_results(sid)
+                        if not df_results.empty:
+                            st.download_button("📥 Download Benchmark Results (CSV)", df_results.to_csv(index=False).encode('utf-8'), f"benchmark_{sid}.csv", "text/csv", type="primary")
