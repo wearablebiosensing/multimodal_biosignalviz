@@ -1,0 +1,5482 @@
+[
+  {
+    "id": "pt_0",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1430.9175203813409,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05615561954498116
+    }
+  },
+  {
+    "id": "pt_1",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2938.0038674098478,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6671949832736837
+    }
+  },
+  {
+    "id": "pt_2",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3076.9092534142205,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.22434677031740868
+    }
+  },
+  {
+    "id": "pt_3",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1629.0418799298457,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.35313293044163496
+    }
+  },
+  {
+    "id": "pt_4",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2345.1842358666363,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9831759440266624
+    }
+  },
+  {
+    "id": "pt_5",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2146.916757103102,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.34451934517510474
+    }
+  },
+  {
+    "id": "pt_6",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2120.0606299293545,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.45994522156811624
+    }
+  },
+  {
+    "id": "pt_7",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2526.467799556711,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05071147462306669
+    }
+  },
+  {
+    "id": "pt_8",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1569.8032472638229,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.059100896128212566
+    }
+  },
+  {
+    "id": "pt_9",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1542.34189912044,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5597500455017893
+    }
+  },
+  {
+    "id": "pt_10",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3333.891202238166,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.11480044109411702
+    }
+  },
+  {
+    "id": "pt_11",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 200.9274052546624,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7093629674232886
+    }
+  },
+  {
+    "id": "pt_12",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2781.7683692873566,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.18304187583152642
+    }
+  },
+  {
+    "id": "pt_13",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 579.2926957943482,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.881039089310862
+    }
+  },
+  {
+    "id": "pt_14",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3257.6516071720125,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.12538537473718736
+    }
+  },
+  {
+    "id": "pt_15",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2262.8450167646283,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.028013055809525178
+    }
+  },
+  {
+    "id": "pt_16",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 633.3697275493822,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6365688204343464
+    }
+  },
+  {
+    "id": "pt_17",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1010.5135491622755,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08499771607502793
+    }
+  },
+  {
+    "id": "pt_18",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1879.7186085810015,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.748184417031385
+    }
+  },
+  {
+    "id": "pt_19",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2424.8105588491158,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3700415936303951
+    }
+  },
+  {
+    "id": "pt_20",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1782.753421102955,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9649533747851694
+    }
+  },
+  {
+    "id": "pt_21",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2781.3113019822263,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9979034105812845
+    }
+  },
+  {
+    "id": "pt_22",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1433.147733840515,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.07352207178365178
+    }
+  },
+  {
+    "id": "pt_23",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 435.4117600857523,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4931412849324649
+    }
+  },
+  {
+    "id": "pt_24",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2157.46793989899,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05409538632366062
+    }
+  },
+  {
+    "id": "pt_25",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2822.477970898761,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9447229187656884
+    }
+  },
+  {
+    "id": "pt_26",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 179.16699931733876,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7762732056489015
+    }
+  },
+  {
+    "id": "pt_27",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2428.8149808845383,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6838200581829763
+    }
+  },
+  {
+    "id": "pt_28",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2514.400375836805,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.48035238291389315
+    }
+  },
+  {
+    "id": "pt_29",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 88.5515680625228,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1672688986015407
+    }
+  },
+  {
+    "id": "pt_30",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1880.2685130472685,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5058538864333927
+    }
+  },
+  {
+    "id": "pt_31",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2587.10215675707,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.07914316223223494
+    }
+  },
+  {
+    "id": "pt_32",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1698.584041397859,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.0819766117564501
+    }
+  },
+  {
+    "id": "pt_33",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1302.7374853372874,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.23664302178965657
+    }
+  },
+  {
+    "id": "pt_34",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 98.4076891543292,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5099662221014617
+    }
+  },
+  {
+    "id": "pt_35",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1508.8505272965183,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6283381577420264
+    }
+  },
+  {
+    "id": "pt_36",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2542.446613311902,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.44593591011798617
+    }
+  },
+  {
+    "id": "pt_37",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1313.6286532523745,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3541651365047588
+    }
+  },
+  {
+    "id": "pt_38",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 129.87413443758936,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.938495471563706
+    }
+  },
+  {
+    "id": "pt_39",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 999.7314400571458,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4202128411193665
+    }
+  },
+  {
+    "id": "pt_40",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1058.0594529820862,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9627698329384768
+    }
+  },
+  {
+    "id": "pt_41",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2896.737222684279,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.36321358065161147
+    }
+  },
+  {
+    "id": "pt_42",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1965.6356460152804,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.16118905348302237
+    }
+  },
+  {
+    "id": "pt_43",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2930.9829898820262,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4768597443579238
+    }
+  },
+  {
+    "id": "pt_44",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2349.374425526679,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8723593728201664
+    }
+  },
+  {
+    "id": "pt_45",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2104.8812551701767,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1947518148766536
+    }
+  },
+  {
+    "id": "pt_46",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3249.960635152831,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.22227367297953082
+    }
+  },
+  {
+    "id": "pt_47",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1655.8279015083003,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7091086132620716
+    }
+  },
+  {
+    "id": "pt_48",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1308.5433714444378,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4606023562987772
+    }
+  },
+  {
+    "id": "pt_49",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1695.101328563058,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.09934208543440393
+    }
+  },
+  {
+    "id": "pt_50",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2270.947596037031,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.33280053639524165
+    }
+  },
+  {
+    "id": "pt_51",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2500.5104642202373,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.36405302374540793
+    }
+  },
+  {
+    "id": "pt_52",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2358.115792288413,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7811172464478239
+    }
+  },
+  {
+    "id": "pt_53",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1192.9550904103744,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3052054271217022
+    }
+  },
+  {
+    "id": "pt_54",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1816.85788705104,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.21367853076050902
+    }
+  },
+  {
+    "id": "pt_55",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 432.25302266953986,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8845417365355873
+    }
+  },
+  {
+    "id": "pt_56",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 315.1622937448184,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9619113521799656
+    }
+  },
+  {
+    "id": "pt_57",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 884.2759224103314,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.16417941344244646
+    }
+  },
+  {
+    "id": "pt_58",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 271.1911894214366,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7717188969506804
+    }
+  },
+  {
+    "id": "pt_59",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1450.2296651669426,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7102724777766465
+    }
+  },
+  {
+    "id": "pt_60",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1011.6644510979252,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.645407901713271
+    }
+  },
+  {
+    "id": "pt_61",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2046.9535157839941,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8636603243629639
+    }
+  },
+  {
+    "id": "pt_62",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3249.1490953582356,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8995421288389635
+    }
+  },
+  {
+    "id": "pt_63",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3419.770910450125,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5425625505285788
+    }
+  },
+  {
+    "id": "pt_64",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1861.972086393163,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8287476337422603
+    }
+  },
+  {
+    "id": "pt_65",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2896.5327931450224,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5157183598002547
+    }
+  },
+  {
+    "id": "pt_66",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1869.6720887383335,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3681452773444567
+    }
+  },
+  {
+    "id": "pt_67",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 95.0448056113164,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.14610494989550926
+    }
+  },
+  {
+    "id": "pt_68",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2680.7550136204472,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.18224271553661242
+    }
+  },
+  {
+    "id": "pt_69",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 902.9184172993698,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8632407670015582
+    }
+  },
+  {
+    "id": "pt_70",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3051.735413559844,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7786414934302482
+    }
+  },
+  {
+    "id": "pt_71",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1518.6173452286284,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.19801671268351395
+    }
+  },
+  {
+    "id": "pt_72",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2695.786432621017,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5807879297527563
+    }
+  },
+  {
+    "id": "pt_73",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2200.0632692660897,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2366367694696888
+    }
+  },
+  {
+    "id": "pt_74",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2270.7149500736023,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.10120329334185096
+    }
+  },
+  {
+    "id": "pt_75",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3456.126292845659,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5100792813449981
+    }
+  },
+  {
+    "id": "pt_76",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2984.6068064108267,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.21341023994731334
+    }
+  },
+  {
+    "id": "pt_77",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 705.5290354524855,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5208165604173336
+    }
+  },
+  {
+    "id": "pt_78",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2484.4112182458393,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05046918061827377
+    }
+  },
+  {
+    "id": "pt_79",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 872.640676518445,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.019627609806257662
+    }
+  },
+  {
+    "id": "pt_80",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2850.481516676433,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2942463911012845
+    }
+  },
+  {
+    "id": "pt_81",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 770.7356423162291,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7848082305385062
+    }
+  },
+  {
+    "id": "pt_82",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1863.751227598263,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2846088676737265
+    }
+  },
+  {
+    "id": "pt_83",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2319.8216496863206,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.36898518472774
+    }
+  },
+  {
+    "id": "pt_84",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 154.35379369405848,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.32996260167838865
+    }
+  },
+  {
+    "id": "pt_85",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1419.8780611091727,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6666300403310987
+    }
+  },
+  {
+    "id": "pt_86",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 745.5053598018502,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7057824311909567
+    }
+  },
+  {
+    "id": "pt_87",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3424.493754621725,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.07353486364744155
+    }
+  },
+  {
+    "id": "pt_88",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 531.6974835483874,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5854667332670537
+    }
+  },
+  {
+    "id": "pt_89",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2587.6452610253523,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4168444928597238
+    }
+  },
+  {
+    "id": "pt_90",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 769.7717928100682,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2933952450265904
+    }
+  },
+  {
+    "id": "pt_91",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1514.0019187761109,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5818270680180743
+    }
+  },
+  {
+    "id": "pt_92",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1198.4381934953876,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.11935360719454469
+    }
+  },
+  {
+    "id": "pt_93",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 932.3961879045391,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.27554019679335795
+    }
+  },
+  {
+    "id": "pt_94",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3529.3623148926495,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.051584907672525326
+    }
+  },
+  {
+    "id": "pt_95",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2283.798856583694,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.06321159272906751
+    }
+  },
+  {
+    "id": "pt_96",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 949.3448256940942,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3596133562795729
+    }
+  },
+  {
+    "id": "pt_97",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1733.9808114807702,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8056076179457259
+    }
+  },
+  {
+    "id": "pt_98",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 718.9123470951346,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08084928750003839
+    }
+  },
+  {
+    "id": "pt_99",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3043.6079081291186,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5689862615057707
+    }
+  },
+  {
+    "id": "pt_100",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 218.71958326942837,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9598439608463524
+    }
+  },
+  {
+    "id": "pt_101",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 434.46073516937787,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9791590883234128
+    }
+  },
+  {
+    "id": "pt_102",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1099.4830195786221,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8361642571739714
+    }
+  },
+  {
+    "id": "pt_103",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3029.2710000395905,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.14416390628779596
+    }
+  },
+  {
+    "id": "pt_104",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2619.270116787061,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.621421322302602
+    }
+  },
+  {
+    "id": "pt_105",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2964.1394530152,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.057216973738763444
+    }
+  },
+  {
+    "id": "pt_106",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2928.465465886781,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08043311968281874
+    }
+  },
+  {
+    "id": "pt_107",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2913.044758656062,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5511763232042498
+    }
+  },
+  {
+    "id": "pt_108",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1875.566083356064,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6474407360277846
+    }
+  },
+  {
+    "id": "pt_109",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3163.3299742130093,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5776067739732674
+    }
+  },
+  {
+    "id": "pt_110",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 688.6544064873365,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.10733272836335328
+    }
+  },
+  {
+    "id": "pt_111",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1433.7811372460235,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8761239341925746
+    }
+  },
+  {
+    "id": "pt_112",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1802.5933668940113,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3877810953478552
+    }
+  },
+  {
+    "id": "pt_113",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3288.1772664281543,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.09538963133296874
+    }
+  },
+  {
+    "id": "pt_114",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2161.7911437757953,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.826381323732685
+    }
+  },
+  {
+    "id": "pt_115",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1598.520111776081,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.47636187429790056
+    }
+  },
+  {
+    "id": "pt_116",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 98.3959734362843,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6473065034615091
+    }
+  },
+  {
+    "id": "pt_117",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2262.6498702886875,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2841348291613295
+    }
+  },
+  {
+    "id": "pt_118",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 435.0101297258582,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.0021479591317044022
+    }
+  },
+  {
+    "id": "pt_119",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3114.6390859875055,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9602841216812611
+    }
+  },
+  {
+    "id": "pt_120",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3230.2971616934915,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.23960355142273082
+    }
+  },
+  {
+    "id": "pt_121",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1187.411030429119,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.16133814460013185
+    }
+  },
+  {
+    "id": "pt_122",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2690.0541843784995,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.19821441314213528
+    }
+  },
+  {
+    "id": "pt_123",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1204.49725581046,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08989913207331246
+    }
+  },
+  {
+    "id": "pt_124",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1351.981186694726,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7798110085738392
+    }
+  },
+  {
+    "id": "pt_125",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1165.2768092334115,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2927405784435725
+    }
+  },
+  {
+    "id": "pt_126",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 704.7445345639389,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9111965724487008
+    }
+  },
+  {
+    "id": "pt_127",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2284.521456922896,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5001142302771757
+    }
+  },
+  {
+    "id": "pt_128",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 54.59271945104347,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6976387540425903
+    }
+  },
+  {
+    "id": "pt_129",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 992.3969020932379,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5663282277449637
+    }
+  },
+  {
+    "id": "pt_130",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3196.5817138180323,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8974128016688078
+    }
+  },
+  {
+    "id": "pt_131",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3335.942723624411,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5572480285600855
+    }
+  },
+  {
+    "id": "pt_132",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2825.9932451827963,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2072637157466789
+    }
+  },
+  {
+    "id": "pt_133",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 593.3407664180105,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7494284737459089
+    }
+  },
+  {
+    "id": "pt_134",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2717.9004623998294,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.35221437694096414
+    }
+  },
+  {
+    "id": "pt_135",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2507.528514014862,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.17771264761134065
+    }
+  },
+  {
+    "id": "pt_136",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 801.119142401077,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.38240071370951445
+    }
+  },
+  {
+    "id": "pt_137",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1746.0954306430262,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.535659099982349
+    }
+  },
+  {
+    "id": "pt_138",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1718.0025041944814,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.31021352160039717
+    }
+  },
+  {
+    "id": "pt_139",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2009.3242644997317,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05430417642801433
+    }
+  },
+  {
+    "id": "pt_140",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3402.345472526097,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9412267245231078
+    }
+  },
+  {
+    "id": "pt_141",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1829.0482542131083,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6401510285937208
+    }
+  },
+  {
+    "id": "pt_142",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 719.1101138523524,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.367621661700993
+    }
+  },
+  {
+    "id": "pt_143",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3096.4481974226887,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8245267546376904
+    }
+  },
+  {
+    "id": "pt_144",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3378.4885375683143,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.17139535081629398
+    }
+  },
+  {
+    "id": "pt_145",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1945.9254759507696,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.16428715380739434
+    }
+  },
+  {
+    "id": "pt_146",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 164.12494181812954,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.29642841706280665
+    }
+  },
+  {
+    "id": "pt_147",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3143.1861588492748,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.10416899490674081
+    }
+  },
+  {
+    "id": "pt_148",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 978.7207508544583,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6441000246621624
+    }
+  },
+  {
+    "id": "pt_149",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3010.307007715467,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6233165163609068
+    }
+  },
+  {
+    "id": "pt_150",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1598.9927486151216,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.006179537374598976
+    }
+  },
+  {
+    "id": "pt_151",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2985.5349684136204,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.12983009344257723
+    }
+  },
+  {
+    "id": "pt_152",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1785.2371522350006,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6996069422433432
+    }
+  },
+  {
+    "id": "pt_153",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2590.288046433197,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6334933286943345
+    }
+  },
+  {
+    "id": "pt_154",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3447.8662411971522,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.23750519260132918
+    }
+  },
+  {
+    "id": "pt_155",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1255.073193804915,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8890819013671327
+    }
+  },
+  {
+    "id": "pt_156",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 470.8717409967324,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5541336555354652
+    }
+  },
+  {
+    "id": "pt_157",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2962.8365129199155,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4771965710742122
+    }
+  },
+  {
+    "id": "pt_158",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2598.352528063172,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9004852288641991
+    }
+  },
+  {
+    "id": "pt_159",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1060.1125816774963,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8940762276531655
+    }
+  },
+  {
+    "id": "pt_160",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 399.07852502309515,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1146561096121057
+    }
+  },
+  {
+    "id": "pt_161",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1090.787994234943,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3552688221998954
+    }
+  },
+  {
+    "id": "pt_162",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3043.4778310907086,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6875062628864661
+    }
+  },
+  {
+    "id": "pt_163",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2673.8409673449582,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.683092266761265
+    }
+  },
+  {
+    "id": "pt_164",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 621.6989497090843,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.968323163661769
+    }
+  },
+  {
+    "id": "pt_165",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3397.9507232280143,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.39848802154468066
+    }
+  },
+  {
+    "id": "pt_166",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3137.3226700755945,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.14386025416664172
+    }
+  },
+  {
+    "id": "pt_167",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 572.4634938195626,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9896083198542294
+    }
+  },
+  {
+    "id": "pt_168",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2796.3556930176615,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8096786522490084
+    }
+  },
+  {
+    "id": "pt_169",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3533.968262754163,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08096210862801712
+    }
+  },
+  {
+    "id": "pt_170",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2153.6256732250586,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1215904189364021
+    }
+  },
+  {
+    "id": "pt_171",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 680.1380288870448,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7295424237921003
+    }
+  },
+  {
+    "id": "pt_172",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 620.9765616456941,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9832625693984166
+    }
+  },
+  {
+    "id": "pt_173",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 807.9803733855983,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.17422388686227797
+    }
+  },
+  {
+    "id": "pt_174",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1261.623410134608,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7955787922054792
+    }
+  },
+  {
+    "id": "pt_175",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2109.884147843792,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.12603230514451735
+    }
+  },
+  {
+    "id": "pt_176",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3126.577679346696,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.44905956106508393
+    }
+  },
+  {
+    "id": "pt_177",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2625.22921957841,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7787228915001817
+    }
+  },
+  {
+    "id": "pt_178",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2281.4229570988155,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5752042864313487
+    }
+  },
+  {
+    "id": "pt_179",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2806.235801755733,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8176152658830281
+    }
+  },
+  {
+    "id": "pt_180",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2125.6190374937473,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.33895523042111075
+    }
+  },
+  {
+    "id": "pt_181",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3211.902415171911,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7164534660637012
+    }
+  },
+  {
+    "id": "pt_182",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 475.27875708399085,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3650328925074646
+    }
+  },
+  {
+    "id": "pt_183",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 96.75428608786936,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5738702266797221
+    }
+  },
+  {
+    "id": "pt_184",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1459.5245341992365,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.690770485494405
+    }
+  },
+  {
+    "id": "pt_185",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 464.5137178143115,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3195694470147167
+    }
+  },
+  {
+    "id": "pt_186",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1413.772162808913,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.0177354872661738
+    }
+  },
+  {
+    "id": "pt_187",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3473.5336413014234,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.06211756342730357
+    }
+  },
+  {
+    "id": "pt_188",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 194.4328824044711,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.451804823619793
+    }
+  },
+  {
+    "id": "pt_189",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1612.2414905962135,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.30611141927191465
+    }
+  },
+  {
+    "id": "pt_190",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 351.1994691110874,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5545712501897877
+    }
+  },
+  {
+    "id": "pt_191",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1704.2147314369086,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7360907252591953
+    }
+  },
+  {
+    "id": "pt_192",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2651.317169895841,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9347174042902898
+    }
+  },
+  {
+    "id": "pt_193",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 91.85078592271552,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9356768525893789
+    }
+  },
+  {
+    "id": "pt_194",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1509.8389837244124,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3538501214631029
+    }
+  },
+  {
+    "id": "pt_195",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2646.6956800956764,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9034942920052623
+    }
+  },
+  {
+    "id": "pt_196",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2327.140645455749,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3419692443996287
+    }
+  },
+  {
+    "id": "pt_197",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3057.3158512587947,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5041038978165989
+    }
+  },
+  {
+    "id": "pt_198",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1396.6269871229304,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5314159132907821
+    }
+  },
+  {
+    "id": "pt_199",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1402.5319679156785,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.42628498404860937
+    }
+  },
+  {
+    "id": "pt_200",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3065.689810433685,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.013865533293679788
+    }
+  },
+  {
+    "id": "pt_201",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2314.1825105048365,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3140384297419131
+    }
+  },
+  {
+    "id": "pt_202",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 767.3629353713104,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7554187202603776
+    }
+  },
+  {
+    "id": "pt_203",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1397.108154374438,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5439901448264707
+    }
+  },
+  {
+    "id": "pt_204",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 259.4826137351448,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.10688518716770223
+    }
+  },
+  {
+    "id": "pt_205",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 381.75567380274697,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5653620854019856
+    }
+  },
+  {
+    "id": "pt_206",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 302.6511857156312,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7783151831253705
+    }
+  },
+  {
+    "id": "pt_207",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1494.686468458706,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.38368033969531457
+    }
+  },
+  {
+    "id": "pt_208",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3061.6282989271194,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9106593162408766
+    }
+  },
+  {
+    "id": "pt_209",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 333.33656563693,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8297556287747998
+    }
+  },
+  {
+    "id": "pt_210",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 669.6254193886458,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.49688845100116985
+    }
+  },
+  {
+    "id": "pt_211",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3258.172240658386,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9951602392197834
+    }
+  },
+  {
+    "id": "pt_212",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3104.5409922334393,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.12807935863707287
+    }
+  },
+  {
+    "id": "pt_213",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1788.674357144608,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.704232390088615
+    }
+  },
+  {
+    "id": "pt_214",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 82.42325724459563,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.287675023159113
+    }
+  },
+  {
+    "id": "pt_215",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 243.22254431464722,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3980393527241144
+    }
+  },
+  {
+    "id": "pt_216",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3226.7175738849655,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7730528897633491
+    }
+  },
+  {
+    "id": "pt_217",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 412.9651840095016,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.10629597196658425
+    }
+  },
+  {
+    "id": "pt_218",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3564.0216982054544,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.860380912167665
+    }
+  },
+  {
+    "id": "pt_219",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3270.809013367379,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7003422112818906
+    }
+  },
+  {
+    "id": "pt_220",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1851.2358855033422,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2880943414679261
+    }
+  },
+  {
+    "id": "pt_221",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2370.0780026696857,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.855103033014655
+    }
+  },
+  {
+    "id": "pt_222",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 141.84282210423947,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3785110922310133
+    }
+  },
+  {
+    "id": "pt_223",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1892.5721651245078,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2100349290003195
+    }
+  },
+  {
+    "id": "pt_224",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 263.6736674047298,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.0859770492731593
+    }
+  },
+  {
+    "id": "pt_225",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1861.3871054819904,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9603518462214583
+    }
+  },
+  {
+    "id": "pt_226",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1391.9925168484117,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8726213694313874
+    }
+  },
+  {
+    "id": "pt_227",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2504.617978395991,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9669639270859816
+    }
+  },
+  {
+    "id": "pt_228",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 48.7917208308621,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7696271204923945
+    }
+  },
+  {
+    "id": "pt_229",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1683.2765613085387,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3788113245235083
+    }
+  },
+  {
+    "id": "pt_230",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 276.54086096083654,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7413197720561244
+    }
+  },
+  {
+    "id": "pt_231",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1814.212754150793,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8018789304894427
+    }
+  },
+  {
+    "id": "pt_232",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1638.5940961660128,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4822746958797193
+    }
+  },
+  {
+    "id": "pt_233",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3425.0115656126086,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8298296542617449
+    }
+  },
+  {
+    "id": "pt_234",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 836.4641675554406,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9745005324947738
+    }
+  },
+  {
+    "id": "pt_235",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2719.2928150953953,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.23467776405830876
+    }
+  },
+  {
+    "id": "pt_236",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2348.2141081775776,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9286711939079743
+    }
+  },
+  {
+    "id": "pt_237",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1766.976910324902,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9387589691854428
+    }
+  },
+  {
+    "id": "pt_238",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2166.9435136393877,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.699046872715021
+    }
+  },
+  {
+    "id": "pt_239",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 516.2347907089718,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9101426488238483
+    }
+  },
+  {
+    "id": "pt_240",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 775.4365616854666,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4941361431902158
+    }
+  },
+  {
+    "id": "pt_241",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3283.927512608378,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8164659834037092
+    }
+  },
+  {
+    "id": "pt_242",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2804.2090074070566,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8367236330629073
+    }
+  },
+  {
+    "id": "pt_243",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 421.8186948048433,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3643042981889676
+    }
+  },
+  {
+    "id": "pt_244",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 456.83989475524515,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7453322879166427
+    }
+  },
+  {
+    "id": "pt_245",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 752.0408083584541,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.19763323217816664
+    }
+  },
+  {
+    "id": "pt_246",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2328.2845549309195,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.02407171575620204
+    }
+  },
+  {
+    "id": "pt_247",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 74.84057698576065,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3748495001268993
+    }
+  },
+  {
+    "id": "pt_248",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 499.7944388476783,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5916640354303959
+    }
+  },
+  {
+    "id": "pt_249",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1320.6173127226275,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8552307683705923
+    }
+  },
+  {
+    "id": "pt_250",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2540.2633244985,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3880378240867517
+    }
+  },
+  {
+    "id": "pt_251",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 422.84784252874636,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6674385136346775
+    }
+  },
+  {
+    "id": "pt_252",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1458.80053541017,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4176101168899725
+    }
+  },
+  {
+    "id": "pt_253",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1986.573728403376,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3971045349547885
+    }
+  },
+  {
+    "id": "pt_254",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3117.309563317729,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8378994929977979
+    }
+  },
+  {
+    "id": "pt_255",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 158.45492185773784,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7148436740874825
+    }
+  },
+  {
+    "id": "pt_256",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2628.887080790331,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.11068029110031574
+    }
+  },
+  {
+    "id": "pt_257",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2475.802990370386,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6681916349824009
+    }
+  },
+  {
+    "id": "pt_258",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2272.259837241588,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8679425533071907
+    }
+  },
+  {
+    "id": "pt_259",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 140.6603886676443,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.42074954100407247
+    }
+  },
+  {
+    "id": "pt_260",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1653.7912332074638,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.41056692664409866
+    }
+  },
+  {
+    "id": "pt_261",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1985.736522702948,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9977799114550379
+    }
+  },
+  {
+    "id": "pt_262",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3395.6921140882027,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3722662625461982
+    }
+  },
+  {
+    "id": "pt_263",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 306.9180966740726,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9295918253429644
+    }
+  },
+  {
+    "id": "pt_264",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 683.6137123847768,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6907086374336089
+    }
+  },
+  {
+    "id": "pt_265",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3320.8236134607664,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.02810979150392867
+    }
+  },
+  {
+    "id": "pt_266",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1299.8589168715507,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9989213317436597
+    }
+  },
+  {
+    "id": "pt_267",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 309.50334850867955,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2155180769200361
+    }
+  },
+  {
+    "id": "pt_268",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2751.2286061935465,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.06226114156956952
+    }
+  },
+  {
+    "id": "pt_269",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2110.1485738296233,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8367333923977199
+    }
+  },
+  {
+    "id": "pt_270",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1863.0748135707622,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.45886880936987007
+    }
+  },
+  {
+    "id": "pt_271",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 677.9424370852269,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.17591329327395366
+    }
+  },
+  {
+    "id": "pt_272",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2812.629599711104,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5744034977887702
+    }
+  },
+  {
+    "id": "pt_273",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 908.7176543877267,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.854476880727342
+    }
+  },
+  {
+    "id": "pt_274",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2750.7653163999444,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9848069992594095
+    }
+  },
+  {
+    "id": "pt_275",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1588.8715634668047,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4842301451946489
+    }
+  },
+  {
+    "id": "pt_276",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 327.127536816026,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.11346706486358571
+    }
+  },
+  {
+    "id": "pt_277",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2690.8977631016764,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8918110498343109
+    }
+  },
+  {
+    "id": "pt_278",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1078.9702718469787,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8500790258560803
+    }
+  },
+  {
+    "id": "pt_279",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 268.60299632144324,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08665786734477687
+    }
+  },
+  {
+    "id": "pt_280",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 948.8018769331536,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6113685035378277
+    }
+  },
+  {
+    "id": "pt_281",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 56.65447583208958,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.30666072588921944
+    }
+  },
+  {
+    "id": "pt_282",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1672.2800175616724,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.22320463820777747
+    }
+  },
+  {
+    "id": "pt_283",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 901.8747170946152,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6539086586420578
+    }
+  },
+  {
+    "id": "pt_284",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3221.9673199584026,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.925939392753937
+    }
+  },
+  {
+    "id": "pt_285",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 678.9301981850122,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.136720733351827
+    }
+  },
+  {
+    "id": "pt_286",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 857.0620892025954,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1628960642391355
+    }
+  },
+  {
+    "id": "pt_287",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 682.8054293926618,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.33841277347529497
+    }
+  },
+  {
+    "id": "pt_288",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 698.6924701052897,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1998132962606861
+    }
+  },
+  {
+    "id": "pt_289",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 958.9468355164888,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9319554871279616
+    }
+  },
+  {
+    "id": "pt_290",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 439.8116972937943,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6804022166694484
+    }
+  },
+  {
+    "id": "pt_291",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3013.4955371990804,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.273001180492943
+    }
+  },
+  {
+    "id": "pt_292",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1749.7361801296945,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.17195548121788928
+    }
+  },
+  {
+    "id": "pt_293",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1574.0847763632758,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6251020115149521
+    }
+  },
+  {
+    "id": "pt_294",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1551.9611683201083,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.43669751080136865
+    }
+  },
+  {
+    "id": "pt_295",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 58.992530771080666,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9418600239922154
+    }
+  },
+  {
+    "id": "pt_296",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2759.536584634187,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.44001176892232197
+    }
+  },
+  {
+    "id": "pt_297",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 942.6095331543972,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8732090766829392
+    }
+  },
+  {
+    "id": "pt_298",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 825.8200719818645,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.474558973030092
+    }
+  },
+  {
+    "id": "pt_299",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1591.0606504772213,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.07786270851583976
+    }
+  },
+  {
+    "id": "pt_300",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1946.7998567660634,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.01764700157886334
+    }
+  },
+  {
+    "id": "pt_301",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3002.5372199414787,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.46393548850870925
+    }
+  },
+  {
+    "id": "pt_302",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2574.0664082931908,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4662442914349266
+    }
+  },
+  {
+    "id": "pt_303",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3198.2893034705316,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.42591157092408394
+    }
+  },
+  {
+    "id": "pt_304",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 514.9221618448847,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6249470954811736
+    }
+  },
+  {
+    "id": "pt_305",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2842.656582853014,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8102903667204081
+    }
+  },
+  {
+    "id": "pt_306",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1545.5568250597978,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6346961802953562
+    }
+  },
+  {
+    "id": "pt_307",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 788.1322787831043,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8850948481006611
+    }
+  },
+  {
+    "id": "pt_308",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 610.9364937794485,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2647722699046541
+    }
+  },
+  {
+    "id": "pt_309",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 441.0564873867451,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.11840479370623425
+    }
+  },
+  {
+    "id": "pt_310",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2515.740809986451,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05038516059237652
+    }
+  },
+  {
+    "id": "pt_311",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1757.6990761720745,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5075070581963012
+    }
+  },
+  {
+    "id": "pt_312",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 192.04954606441964,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3825758772306965
+    }
+  },
+  {
+    "id": "pt_313",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1029.832486821693,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5125217622055974
+    }
+  },
+  {
+    "id": "pt_314",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 156.58576773373443,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.931630074542972
+    }
+  },
+  {
+    "id": "pt_315",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 864.690975454753,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5098609764980389
+    }
+  },
+  {
+    "id": "pt_316",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1517.606180960382,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3687758466576786
+    }
+  },
+  {
+    "id": "pt_317",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 668.3049139017963,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9371897669633752
+    }
+  },
+  {
+    "id": "pt_318",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 692.1377821605039,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9212487339458381
+    }
+  },
+  {
+    "id": "pt_319",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3420.100572707501,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7136721260285993
+    }
+  },
+  {
+    "id": "pt_320",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2093.385424844395,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4320559604592282
+    }
+  },
+  {
+    "id": "pt_321",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2500.753107040791,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5620805150041256
+    }
+  },
+  {
+    "id": "pt_322",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3598.82013092858,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4495054618155555
+    }
+  },
+  {
+    "id": "pt_323",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1616.6979562923811,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4793605347454354
+    }
+  },
+  {
+    "id": "pt_324",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2054.773116886954,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9906321938667861
+    }
+  },
+  {
+    "id": "pt_325",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2072.596091176791,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.0793147700873783
+    }
+  },
+  {
+    "id": "pt_326",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2440.648941585798,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6070873842336424
+    }
+  },
+  {
+    "id": "pt_327",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 642.5636487487552,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6960200791552621
+    }
+  },
+  {
+    "id": "pt_328",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2230.081699349338,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.07296431854203167
+    }
+  },
+  {
+    "id": "pt_329",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 938.7093722685726,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5267111673322883
+    }
+  },
+  {
+    "id": "pt_330",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2682.5331182649325,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6714933123305227
+    }
+  },
+  {
+    "id": "pt_331",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2246.3235248730707,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6748474479787787
+    }
+  },
+  {
+    "id": "pt_332",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2896.458839953944,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.16893746782425156
+    }
+  },
+  {
+    "id": "pt_333",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3214.5053231536895,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3143527859810913
+    }
+  },
+  {
+    "id": "pt_334",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1304.917001758262,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.16472008206009425
+    }
+  },
+  {
+    "id": "pt_335",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 629.1331841158778,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6220116797233348
+    }
+  },
+  {
+    "id": "pt_336",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 750.7924786006828,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4771039417820879
+    }
+  },
+  {
+    "id": "pt_337",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 259.775647054,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9450309626291874
+    }
+  },
+  {
+    "id": "pt_338",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 276.31365568559227,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.28654351424634905
+    }
+  },
+  {
+    "id": "pt_339",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1797.478706403511,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5836922479245715
+    }
+  },
+  {
+    "id": "pt_340",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 233.90770362285798,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2635928901854525
+    }
+  },
+  {
+    "id": "pt_341",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2043.5627302031305,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.88062460913613
+    }
+  },
+  {
+    "id": "pt_342",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2601.492418393003,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5429624029200281
+    }
+  },
+  {
+    "id": "pt_343",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1496.2000416867095,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.43272748643864845
+    }
+  },
+  {
+    "id": "pt_344",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1384.4036236200247,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05904618449357313
+    }
+  },
+  {
+    "id": "pt_345",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 916.4370386794167,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2599126323405381
+    }
+  },
+  {
+    "id": "pt_346",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2365.59713475878,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7128680202369378
+    }
+  },
+  {
+    "id": "pt_347",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1421.6837179671509,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4550016894584291
+    }
+  },
+  {
+    "id": "pt_348",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1177.1187781859041,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.43723881450956115
+    }
+  },
+  {
+    "id": "pt_349",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 301.0758364235652,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08625133006673613
+    }
+  },
+  {
+    "id": "pt_350",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1930.6627731081405,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8663799920992346
+    }
+  },
+  {
+    "id": "pt_351",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 316.8163460009059,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7652783849565543
+    }
+  },
+  {
+    "id": "pt_352",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3346.2503054339522,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6444390983391929
+    }
+  },
+  {
+    "id": "pt_353",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2063.7652045039276,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3941713357222111
+    }
+  },
+  {
+    "id": "pt_354",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1128.4929146321592,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2990159770234313
+    }
+  },
+  {
+    "id": "pt_355",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3015.576641231574,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.044042912830267844
+    }
+  },
+  {
+    "id": "pt_356",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2778.6616368901614,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6289759105752659
+    }
+  },
+  {
+    "id": "pt_357",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1811.1720109018295,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9119532102408141
+    }
+  },
+  {
+    "id": "pt_358",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3333.9642972799916,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.24444926385400145
+    }
+  },
+  {
+    "id": "pt_359",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 878.8128865436604,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5297200982303184
+    }
+  },
+  {
+    "id": "pt_360",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2744.9061744370606,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4763600561725613
+    }
+  },
+  {
+    "id": "pt_361",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3334.2033635070566,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9637798336111388
+    }
+  },
+  {
+    "id": "pt_362",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1126.010531335902,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7712323293506391
+    }
+  },
+  {
+    "id": "pt_363",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2950.0662134832023,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5503050135241767
+    }
+  },
+  {
+    "id": "pt_364",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1444.3021984076643,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9048351648637634
+    }
+  },
+  {
+    "id": "pt_365",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 21.686543234605082,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8812631617430015
+    }
+  },
+  {
+    "id": "pt_366",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1182.0107609200572,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5026970683394294
+    }
+  },
+  {
+    "id": "pt_367",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 793.5286135873577,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6172090320680148
+    }
+  },
+  {
+    "id": "pt_368",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1468.0127518816919,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.834706490498023
+    }
+  },
+  {
+    "id": "pt_369",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2396.902016423996,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.11067869094493776
+    }
+  },
+  {
+    "id": "pt_370",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1800.3115770990569,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6202576388209292
+    }
+  },
+  {
+    "id": "pt_371",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1788.886663325371,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6006711629918814
+    }
+  },
+  {
+    "id": "pt_372",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1393.634187232371,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8847298447934556
+    }
+  },
+  {
+    "id": "pt_373",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 501.3520659038207,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7544940412773342
+    }
+  },
+  {
+    "id": "pt_374",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 566.8099393790504,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8527364302671442
+    }
+  },
+  {
+    "id": "pt_375",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1841.363742360735,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.26846738535307435
+    }
+  },
+  {
+    "id": "pt_376",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 668.0887808528498,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.03189302173197561
+    }
+  },
+  {
+    "id": "pt_377",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 857.3646045222115,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05869700018599733
+    }
+  },
+  {
+    "id": "pt_378",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 884.3187366759635,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.521891789393303
+    }
+  },
+  {
+    "id": "pt_379",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 707.1990186478612,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5526079382898591
+    }
+  },
+  {
+    "id": "pt_380",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 633.3339629826161,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5544891246444528
+    }
+  },
+  {
+    "id": "pt_381",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 536.3780800064242,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.30448828942835693
+    }
+  },
+  {
+    "id": "pt_382",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2228.0359128679374,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05436363177576431
+    }
+  },
+  {
+    "id": "pt_383",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3433.6236106277333,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.08214333161763343
+    }
+  },
+  {
+    "id": "pt_384",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2975.3384804691746,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7728734013986656
+    }
+  },
+  {
+    "id": "pt_385",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 827.5302852187831,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.22401264868005588
+    }
+  },
+  {
+    "id": "pt_386",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1139.2118290879318,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8490402826202452
+    }
+  },
+  {
+    "id": "pt_387",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1106.940596248746,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5241990112239369
+    }
+  },
+  {
+    "id": "pt_388",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1358.0447589238872,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5132922762764487
+    }
+  },
+  {
+    "id": "pt_389",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1400.0046870059236,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.12976711558170095
+    }
+  },
+  {
+    "id": "pt_390",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 867.0723014205598,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.09817124514555087
+    }
+  },
+  {
+    "id": "pt_391",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1389.1941362383084,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7120882221908611
+    }
+  },
+  {
+    "id": "pt_392",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 278.39589629102386,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.41628537188338033
+    }
+  },
+  {
+    "id": "pt_393",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1686.422780464388,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9064239034772485
+    }
+  },
+  {
+    "id": "pt_394",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3363.0323014687915,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9030977711974255
+    }
+  },
+  {
+    "id": "pt_395",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2171.382144179308,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7530588604912815
+    }
+  },
+  {
+    "id": "pt_396",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1152.6793349674008,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7203227799106529
+    }
+  },
+  {
+    "id": "pt_397",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 617.4032775067179,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8734489751400772
+    }
+  },
+  {
+    "id": "pt_398",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2267.896867473069,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2866228903475293
+    }
+  },
+  {
+    "id": "pt_399",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3003.1862625196945,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.23395259735785434
+    }
+  },
+  {
+    "id": "pt_400",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 993.3704583472247,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7600866432851524
+    }
+  },
+  {
+    "id": "pt_401",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 254.2500545489739,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3725832081678282
+    }
+  },
+  {
+    "id": "pt_402",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1587.4163140803455,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.42951814439639324
+    }
+  },
+  {
+    "id": "pt_403",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1548.1099317997198,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5165231892611841
+    }
+  },
+  {
+    "id": "pt_404",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1717.9338963612615,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8852674707634625
+    }
+  },
+  {
+    "id": "pt_405",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3040.7391488388703,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.724041059676533
+    }
+  },
+  {
+    "id": "pt_406",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2744.8847627335776,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8597138354645681
+    }
+  },
+  {
+    "id": "pt_407",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2664.3550265385975,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2531680020476794
+    }
+  },
+  {
+    "id": "pt_408",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 672.1187364484505,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.22743500089312663
+    }
+  },
+  {
+    "id": "pt_409",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1482.4055147702418,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4900540669714215
+    }
+  },
+  {
+    "id": "pt_410",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1422.425365335971,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9193807185949545
+    }
+  },
+  {
+    "id": "pt_411",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1413.0110386912202,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2963315591859843
+    }
+  },
+  {
+    "id": "pt_412",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 312.6662467229361,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5627414161631974
+    }
+  },
+  {
+    "id": "pt_413",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1075.9475794945947,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8799925171780197
+    }
+  },
+  {
+    "id": "pt_414",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 92.03623854969342,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6876376258644854
+    }
+  },
+  {
+    "id": "pt_415",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 223.31747333586546,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7872224972019708
+    }
+  },
+  {
+    "id": "pt_416",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1028.3902471596173,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7594978117214755
+    }
+  },
+  {
+    "id": "pt_417",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2034.7248450722996,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5342856138679279
+    }
+  },
+  {
+    "id": "pt_418",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2700.5679434911913,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.713633571103114
+    }
+  },
+  {
+    "id": "pt_419",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1948.0014857968267,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8259709516303517
+    }
+  },
+  {
+    "id": "pt_420",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2438.0207437390245,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6811081376484222
+    }
+  },
+  {
+    "id": "pt_421",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1017.8651332230141,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1957505911641052
+    }
+  },
+  {
+    "id": "pt_422",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2729.9612906957873,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5891430696717972
+    }
+  },
+  {
+    "id": "pt_423",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 883.7921820682942,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2895361361392943
+    }
+  },
+  {
+    "id": "pt_424",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3396.6599723258964,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9580018874840556
+    }
+  },
+  {
+    "id": "pt_425",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3375.4763851973817,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4441626995224388
+    }
+  },
+  {
+    "id": "pt_426",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2233.2573928666575,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8992762231573964
+    }
+  },
+  {
+    "id": "pt_427",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 115.94614205523656,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.07810264822488122
+    }
+  },
+  {
+    "id": "pt_428",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1867.8261381431012,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6211908409371452
+    }
+  },
+  {
+    "id": "pt_429",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3281.3511502387523,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9647903970001701
+    }
+  },
+  {
+    "id": "pt_430",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 783.6911978029502,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1502686553016106
+    }
+  },
+  {
+    "id": "pt_431",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1009.4554955699583,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7395845599559258
+    }
+  },
+  {
+    "id": "pt_432",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 48.34760949459738,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8668151993889216
+    }
+  },
+  {
+    "id": "pt_433",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 534.7100842982038,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5664831122072642
+    }
+  },
+  {
+    "id": "pt_434",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3545.621989995025,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6055048876971364
+    }
+  },
+  {
+    "id": "pt_435",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1932.2146669861863,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.20727499653863712
+    }
+  },
+  {
+    "id": "pt_436",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1910.1149810907766,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.05003362162513558
+    }
+  },
+  {
+    "id": "pt_437",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 868.0036513805094,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7972113857530198
+    }
+  },
+  {
+    "id": "pt_438",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 191.68395223670544,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8798203351558519
+    }
+  },
+  {
+    "id": "pt_439",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1654.8820490347089,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8948678658618643
+    }
+  },
+  {
+    "id": "pt_440",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 334.42157392972837,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6218707196903426
+    }
+  },
+  {
+    "id": "pt_441",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1473.0111389835583,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.24910585866293367
+    }
+  },
+  {
+    "id": "pt_442",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3258.5920197251103,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.40364591924877014
+    }
+  },
+  {
+    "id": "pt_443",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2004.6746307697108,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.050317452670635476
+    }
+  },
+  {
+    "id": "pt_444",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2577.7457506413502,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8948787535360387
+    }
+  },
+  {
+    "id": "pt_445",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3516.7370254562934,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.019583000916112092
+    }
+  },
+  {
+    "id": "pt_446",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1077.32403601547,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5752076983843382
+    }
+  },
+  {
+    "id": "pt_447",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1274.113363629443,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5161403286688486
+    }
+  },
+  {
+    "id": "pt_448",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 513.2830243234322,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.09065583193680493
+    }
+  },
+  {
+    "id": "pt_449",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 726.3824635176244,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3919876948867914
+    }
+  },
+  {
+    "id": "pt_450",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1606.5383953014568,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7349931974852348
+    }
+  },
+  {
+    "id": "pt_451",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 28.883805240243852,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4185073798411758
+    }
+  },
+  {
+    "id": "pt_452",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1102.5830881866423,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4628977382538023
+    }
+  },
+  {
+    "id": "pt_453",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 87.46633931374336,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5691004556419605
+    }
+  },
+  {
+    "id": "pt_454",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 676.2367322122313,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6513046980495404
+    }
+  },
+  {
+    "id": "pt_455",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2912.9993531541327,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5643506880860119
+    }
+  },
+  {
+    "id": "pt_456",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2563.8194157447533,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.052329080213666
+    }
+  },
+  {
+    "id": "pt_457",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2973.0616446098365,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9442634733236785
+    }
+  },
+  {
+    "id": "pt_458",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3157.042662511747,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9994086497166121
+    }
+  },
+  {
+    "id": "pt_459",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 216.07762530406922,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.18903839167405556
+    }
+  },
+  {
+    "id": "pt_460",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 180.67055878913553,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.688806937034537
+    }
+  },
+  {
+    "id": "pt_461",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2461.4947490402024,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8007012453506704
+    }
+  },
+  {
+    "id": "pt_462",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1261.04194643824,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.288828974302771
+    }
+  },
+  {
+    "id": "pt_463",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 667.2636339219194,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.18817306321797944
+    }
+  },
+  {
+    "id": "pt_464",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3027.329086693678,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.4771322535631721
+    }
+  },
+  {
+    "id": "pt_465",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 178.3634229111667,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5644253942424416
+    }
+  },
+  {
+    "id": "pt_466",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2182.458117942591,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.1553822913620737
+    }
+  },
+  {
+    "id": "pt_467",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1763.5391951729437,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.21097047071099817
+    }
+  },
+  {
+    "id": "pt_468",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2031.2138067409196,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5199631369761948
+    }
+  },
+  {
+    "id": "pt_469",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 287.13382817947036,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.27354345475412023
+    }
+  },
+  {
+    "id": "pt_470",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 877.5674105925373,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3161076238505328
+    }
+  },
+  {
+    "id": "pt_471",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3155.2469597822464,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.754492916680835
+    }
+  },
+  {
+    "id": "pt_472",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3062.0717776131833,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.04588422408936821
+    }
+  },
+  {
+    "id": "pt_473",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 702.5142005592045,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7447746369578829
+    }
+  },
+  {
+    "id": "pt_474",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2701.388679544265,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.45605107073103146
+    }
+  },
+  {
+    "id": "pt_475",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2127.7556965885915,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2869230636886003
+    }
+  },
+  {
+    "id": "pt_476",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1099.3336574072491,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.21569589743881612
+    }
+  },
+  {
+    "id": "pt_477",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1190.3247389973037,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7329611499621954
+    }
+  },
+  {
+    "id": "pt_478",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1023.8002210763553,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.03236823088284324
+    }
+  },
+  {
+    "id": "pt_479",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2600.8659488601243,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6156342994386
+    }
+  },
+  {
+    "id": "pt_480",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 366.30810224638145,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.059501965319111005
+    }
+  },
+  {
+    "id": "pt_481",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 470.25519668228924,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5446593707433198
+    }
+  },
+  {
+    "id": "pt_482",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1914.1588529477622,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.3144418833987982
+    }
+  },
+  {
+    "id": "pt_483",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1593.6024024543203,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2611755533989595
+    }
+  },
+  {
+    "id": "pt_484",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 280.0287257650237,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.12769506511791517
+    }
+  },
+  {
+    "id": "pt_485",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 501.2816617200402,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.2824382217977156
+    }
+  },
+  {
+    "id": "pt_486",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 541.3834657133331,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.28311938587371843
+    }
+  },
+  {
+    "id": "pt_487",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2274.4427350089372,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.38892136236974706
+    }
+  },
+  {
+    "id": "pt_488",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1186.9454199327556,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7130493808889923
+    }
+  },
+  {
+    "id": "pt_489",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2303.6912548876967,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.18504968524792642
+    }
+  },
+  {
+    "id": "pt_490",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 3007.0756194553705,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.9697038861380151
+    }
+  },
+  {
+    "id": "pt_491",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1573.889233610853,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5233892953695545
+    }
+  },
+  {
+    "id": "pt_492",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 293.01271299026837,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8502379766459733
+    }
+  },
+  {
+    "id": "pt_493",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2588.1025030806845,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.7705086341426857
+    }
+  },
+  {
+    "id": "pt_494",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 1929.6684943519263,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.49605880023905913
+    }
+  },
+  {
+    "id": "pt_495",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 208.96953425623815,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.5275885133467971
+    }
+  },
+  {
+    "id": "pt_496",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2280.291533981334,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.8088109028822359
+    }
+  },
+  {
+    "id": "pt_497",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 969.233036336943,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.6557732134953416
+    }
+  },
+  {
+    "id": "pt_498",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 456.38281256409823,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.830969856959113
+    }
+  },
+  {
+    "id": "pt_499",
+    "type": "point",
+    "label": "R-Peak",
+    "time": 2895.0582214551328,
+    "y_value": 0,
+    "meta": {
+      "confidence": 0.853475760747074
+    }
+  },
+  {
+    "id": "int_stress_0",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 154.5227619142151,
+    "end": 687.8421711307733,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_0_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 638.8477697806585,
+    "end": 642.7527243127486,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_0_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 378.8514035130366,
+    "end": 383.7683133786863,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_0_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 208.60790708441647,
+    "end": 213.6058932110219,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_0_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 470.99722506486114,
+    "end": 475.2988421554839,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_0_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 213.55523463516235,
+    "end": 216.66374041281287,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_1",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 496.00322814958696,
+    "end": 878.5762747445267,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_1_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 560.5110833493549,
+    "end": 564.717500853206,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_1_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 857.3637982153159,
+    "end": 858.9750682665558,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_1_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 840.8549263833386,
+    "end": 845.8208647406019,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_1_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 802.3469086769635,
+    "end": 805.2583723583463,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_1_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 822.8775201132896,
+    "end": 825.3893734826679,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_2",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 1252.5867554936349,
+    "end": 1813.9710908958082,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_2_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1518.0852339888602,
+    "end": 1522.570168360481,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_2_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1285.2976079896982,
+    "end": 1286.8707160866206,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_2_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1280.3469163595514,
+    "end": 1282.603119910519,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_2_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1597.8004608946999,
+    "end": 1599.0303877875751,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_2_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1263.5917667859408,
+    "end": 1266.1260042960978,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_3",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 1446.7360357604862,
+    "end": 1765.6197244708696,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_3_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1492.8561628014838,
+    "end": 1494.914205622513,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_3_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1663.092087185453,
+    "end": 1666.50553146311,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_3_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1538.5732350805365,
+    "end": 1543.110843763502,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_3_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1458.3831711692194,
+    "end": 1459.5599822917832,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_3_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1623.4733256415605,
+    "end": 1624.5854711280597,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_4",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 1562.9051375547513,
+    "end": 1903.6837620618876,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_4_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1861.485827591851,
+    "end": 1865.0473539473705,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_4_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1864.0895462618128,
+    "end": 1866.6090759039307,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_4_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1770.393908541367,
+    "end": 1772.2468304030845,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_4_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1676.1766744851868,
+    "end": 1680.3064526244807,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_4_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1768.0867307345407,
+    "end": 1772.1653404048404,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_5",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 2914.331264613119,
+    "end": 3269.097769101415,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_5_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 3226.4854066033413,
+    "end": 3230.408937333924,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_5_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 3252.7326922824036,
+    "end": 3256.2086575407025,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_5_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 3149.2120951811185,
+    "end": 3151.530677489632,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_5_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 3020.2394877342235,
+    "end": 3024.2147579930815,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_5_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2940.094498836328,
+    "end": 2943.9578833021824,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_6",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 1903.6744134550663,
+    "end": 2398.3931291719637,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_6_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2309.305916259221,
+    "end": 2310.559007093594,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_6_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2020.4603452200977,
+    "end": 2023.6342897623344,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_6_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1908.2110347591104,
+    "end": 1913.1316413317732,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_6_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2132.6244281403606,
+    "end": 2136.9564360598256,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_6_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2233.537498247169,
+    "end": 2236.539385994999,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_7",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 1810.2070673737614,
+    "end": 2264.053521921624,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_7_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2222.2628838634796,
+    "end": 2224.3176029197116,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_7_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1889.874486794807,
+    "end": 1893.6170953053443,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_7_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2161.6284532523896,
+    "end": 2165.3327893763512,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_7_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 1973.5226636076468,
+    "end": 1974.6511908051518,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_7_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2243.6553401741407,
+    "end": 2247.8990175657004,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_8",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 221.88723540705357,
+    "end": 624.7794037301394,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_8_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 548.5452637765873,
+    "end": 550.0879538303902,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_8_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 463.7357268851482,
+    "end": 467.85207923831814,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_8_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 391.1721184446659,
+    "end": 393.06418794810406,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_8_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 490.5861438725284,
+    "end": 491.7430028193148,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_8_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 411.8875987868578,
+    "end": 413.93340019555274,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_stress_9",
+    "type": "interval",
+    "label": "Stress_Episode",
+    "start": 2868.7186677424847,
+    "end": 3194.814309658458,
+    "color": "rgba(255, 0, 0, 0.2)"
+  },
+  {
+    "id": "int_noise_9_0",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 3089.4038833867417,
+    "end": 3093.5811141681743,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_9_1",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 3178.2749400449356,
+    "end": 3180.3121879289683,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_9_2",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2960.188117743309,
+    "end": 2963.1477046237765,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_9_3",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 2963.227731044618,
+    "end": 2965.1392058041097,
+    "color": "rgba(128, 128, 128, 0.5)"
+  },
+  {
+    "id": "int_noise_9_4",
+    "type": "interval",
+    "label": "Motion_Artifact",
+    "start": 3138.5006035393626,
+    "end": 3143.1710112352334,
+    "color": "rgba(128, 128, 128, 0.5)"
+  }
+]
