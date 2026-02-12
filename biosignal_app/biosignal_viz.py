@@ -38,8 +38,10 @@ except ImportError:
         class PerformanceMonitor:
             def __enter__(self): 
                 self.start = time.perf_counter()
+                self.duration = 0
                 return self
-            def __exit__(self, *args): self.duration = time.perf_counter() - self.start
+            def __exit__(self, *args): 
+                self.duration = time.perf_counter() - self.start
     firebase_module = MockFirebase()
 
 # -----------------------------------------------------------------------------
@@ -324,6 +326,7 @@ elif app_mode == "Analysis Dashboard":
             # --- PLOTTING LOGIC ---
             if selected_columns:
                 with st.spinner("Rendering Plot..."):
+                    # Timing block starts here
                     with firebase_module.PerformanceMonitor() as pm:
                         df_slice = df.iloc[start_row:end_row:downsample_rate]
                         x_data = df_slice.index if use_index else df_slice[x_axis]
@@ -363,8 +366,12 @@ elif app_mode == "Analysis Dashboard":
                         fig.update_yaxes(title_font=dict(size=18), tickfont=dict(size=14))
                         if view_mode == "Stacked":
                             for i in range(len(selected_columns)): fig.update_yaxes(title_text=dynamic_y_title, row=i+1, col=1, title_font=dict(size=18))
+                        
+                        # Trigger chart render inside the timing block
                         st.plotly_chart(fig, use_container_width=True)
-                        st.caption(f"⚡ Plot Gen: {pm.duration*1000:.2f} ms")
+                    
+                    # Display metrics AFTER block closure so duration is calculated
+                    st.caption(f"⚡ Plot Gen: {pm.duration*1000:.2f} ms")
 
             st.markdown("---")
             st.subheader("2. Advanced ECG Analysis")
@@ -377,7 +384,7 @@ elif app_mode == "Analysis Dashboard":
                     st.plotly_chart(f1, use_container_width=True)
 
 # -----------------------------------------------------------------------------
-# RESTORED: Evaluation Benchmarking
+# Evaluation Benchmarking
 # -----------------------------------------------------------------------------
 elif app_mode == "Evaluation Experiment":
     st.header("🧪 Experiment: Visualization Latency Benchmark")
@@ -466,6 +473,8 @@ elif app_mode == "Evaluation Experiment":
                                 actual_ch = min(n_ch, data_block.shape[1])
                                 for ch_idx in range(actual_ch):
                                     fig.add_trace(go.Scatter(y=data_block[:end_idx, ch_idx], mode='lines'))
+                                
+                                # Serialization/Rendering simulation if needed, but we time construction
                                 t_plot = time.perf_counter() - t1
                                 total_p = end_idx * actual_ch
                                 
