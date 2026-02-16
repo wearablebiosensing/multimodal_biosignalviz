@@ -13,10 +13,6 @@ Visualize multiple biosignals simultaneously with zoom, pan, and hover capabilit
 Automated QRS detection, Signal Quality Index (SQI) calculation (Skewness, Kurtosis, PSD), and morphological analysis.
 ![ECG Analysis](assets/ecg_analysis.png)
 
-### 3. EDA Decomposition
-Decompose Electrodermal Activity into Tonic (SCL) and Phasic (SCR) components with artifact removal.
-![EDA Analysis](assets/eda_analysis.png)
-
 ---
 
 ## 🚀 Features
@@ -25,14 +21,6 @@ Decompose Electrodermal Activity into Tonic (SCL) and Phasic (SCR) components wi
 * **Performance Optimization:**
     * **Data Slicing:** Select specific time windows to analyze, preventing browser crashes on large files.
     * **Downsampling:** View trends across millions of data points without lag.
-* **🫀 ECG Module:**
-    * Hilbert Transform-based QRS Detection.
-    * Morphological Heartbeat Template generation.
-    * **SQI Metrics:** Calculate Skewness, Kurtosis, and PSD Ratios for specific time windows.
-* **💧 EDA Module:**
-    * Z-Score based Artifact Removal.
-    * Low-pass filtering (1.5Hz & 10Hz).
-    * Decomposition into SCL (Tonic) and SCR (Phasic) components.
 
 ---
 
