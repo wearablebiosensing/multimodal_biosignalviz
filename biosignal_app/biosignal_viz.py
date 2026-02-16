@@ -20,14 +20,11 @@ import gc
 import warnings
 import json
 
-# Suppress FutureWarnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-# Agent Import
 try:
     import firebase_module
 except ImportError:
-    # Fallback for local testing
     class MockFirebase:
         def init_firebase(self): return None
         def create_analysis_session(self, *args): return "local-session"
@@ -45,8 +42,89 @@ except ImportError:
     firebase_module = MockFirebase()
 
 # -----------------------------------------------------------------------------
-# Helper Functions (Data Processing)
+# UI Customization 
 # -----------------------------------------------------------------------------
+st.set_page_config(page_title="BioViz Studio", page_icon="📈", layout="wide")
+
+st.markdown("""
+    <style>
+    /* Global text scaling - Standard readable sizes */
+    html, body, [class*="css"], .main, .stMarkdown, p, span, div, label {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Headers - Balanced hierarchy */
+    h1 { font-size: 32px !important; font-weight: 800 !important; margin-bottom: 20px !important; }
+    h2 { font-size: 26px !important; font-weight: 700 !important; margin-top: 20px !important; border-bottom: 1px solid #ddd; }
+    h3 { font-size: 22px !important; font-weight: 600 !important; }
+    
+    /* Sidebar Scaling */
+    [data-testid="stSidebar"] .stMarkdown p, 
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] .stRadio div {
+        font-size: 14px !important;
+    }
+    [data-testid="stSidebar"] h1 { font-size: 24px !important; }
+
+    /* Annotation Toolkit and Form Controls */
+    .stSelectbox label, .stMultiSelect label, .stNumberInput label, .stTextInput label, .stTextArea label {
+        font-size: 14px !important;
+        font-weight: bold !important;
+        margin-bottom: 5px !important;
+    }
+    
+    /* Input field contents scaling */
+    .stSelectbox div[data-baseweb="select"] > div,
+    .stMultiSelect div[data-baseweb="select"] > div,
+    .stNumberInput input,
+    .stTextInput input,
+    .stTextArea textarea {
+        font-size: 14px !important;
+        min-height: 40px !important;
+        border-width: 1px !important;
+    }
+    
+    /* Expander Scaling */
+    .streamlit-expanderHeader {
+        font-size: 16px !important;
+        font-weight: bold !important;
+        padding: 10px !important;
+    }
+    
+    /* Buttons Scaling */
+    .stButton>button {
+        font-size: 14px !important;
+        height: auto !important;
+        padding: 10px 20px !important;
+        border-radius: 5px !important;
+        font-weight: bold !important;
+        width: 100% !important;
+    }
+    
+    /* Metrics Scaling */
+    [data-testid="stMetricValue"] {
+        font-size: 24px !important;
+        font-weight: bold !important;
+    }
+    [data-testid="stMetricLabel"] {
+        font-size: 14px !important;
+    }
+    
+    /* Slider Scaling */
+    .stSlider label { font-size: 14px !important; font-weight: bold !important; }
+    div[data-testid="stThumbValue"] { font-size: 12px !important; }
+    
+    /* Tab Scaling */
+    .stTabs [data-baseweb="tab"] {
+        font-size: 14px !important;
+        height: 40px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+st.title("BioViz Studio: High-Performance Signal Annotation")
+
 @st.cache_data
 def load_data(file):
     detected_annotations = []
@@ -120,7 +198,6 @@ def process_ecg(data_series, fs, method="pantompkins1985", invert=False):
         return peaks, heart_rate, {}, ecg_cleaned
     except: return [], [], {}, np.zeros(10)
 
-# --- ANNOTATION HELPERS ---
 def save_annotation(session_id, start_t, end_t, label, notes, ann_type, sample_idx=None):
     db = firebase_module.init_firebase()
     if db and session_id:
@@ -195,12 +272,6 @@ def merge_annotations(df, annotations, x_col, use_index, fs=1):
                 merged.loc[mask, 'event_notes'] = merged.loc[mask, 'event_notes'].apply(lambda x: append_str(x, ann['notes']))
     return merged
 
-# -----------------------------------------------------------------------------
-# Main Application Logic
-# -----------------------------------------------------------------------------
-st.set_page_config(page_title="BioViz Studio", page_icon="📈", layout="wide")
-st.title("BioViz Studio: High-Performance Signal Annotation")
-
 with st.sidebar:
     st.title("Navigation")
     app_mode = st.radio("Select Mode", ["Analysis Dashboard", "CSV Concatenator (Prep)", "Evaluation Experiment"])
@@ -218,7 +289,7 @@ elif app_mode == "Analysis Dashboard":
 
     with st.sidebar:
         st.header("1. Data Input")
-        uploaded_file = st.file_uploader("Upload BioSignal File", type=['csv', 'zip', 'acq', 'txt'])
+        uploaded_file = st.file_uploader("Drag and drop file here", type=['csv', 'zip', 'acq', 'txt'])
 
     if uploaded_file is not None:
         df, detected_fs, native_anns = load_data(uploaded_file)
@@ -236,28 +307,29 @@ elif app_mode == "Analysis Dashboard":
             
             current_doc_id = st.session_state.get('firebase_doc_id')
 
+            st.header("Analysis Dashboard")
             st.subheader("1. General Visualization & Annotation")
             use_index = st.checkbox("Use Row Index (Samples) as X-Axis", value=True)
             x_axis = "Row Index" if use_index else st.selectbox("Select X-Axis", list(df.columns))
 
-            selected_columns = st.multiselect("Select Signals", options=df.columns, default=[c for c in df.columns if any(x in c.lower() for x in ['ecg', 'mlii', 'v1'])][:2])
+            selected_columns = st.multiselect("Select Signals to Visualize", options=df.columns, default=[c for c in df.columns if any(x in c.lower() for x in ['ecg', 'mlii', 'v1'])][:2])
 
             col_ctrl1, col_ctrl2, col_ctrl3 = st.columns(3)
             with col_ctrl1:
-                slice_range = st.slider("Select Range", 0, len(df), (st.session_state.start_row, st.session_state.end_row), step=100)
+                slice_range = st.slider("Select Range of Samples", 0, len(df), (st.session_state.start_row, st.session_state.end_row), step=100)
                 st.session_state.start_row, st.session_state.end_row = slice_range
                 btn_prev, btn_next = st.columns(2)
                 win = st.session_state.end_row - st.session_state.start_row
-                if btn_prev.button("⬅️ Previous"):
+                if btn_prev.button("⬅️ Previous Chunk"):
                     st.session_state.start_row = max(0, st.session_state.start_row - win)
                     st.session_state.end_row = st.session_state.start_row + win; st.rerun()
-                if btn_next.button("Next ➡️"):
+                if btn_next.button("Next Chunk ➡️"):
                     st.session_state.start_row = min(len(df) - win, st.session_state.start_row + win)
                     st.session_state.end_row = st.session_state.start_row + win; st.rerun()
                 start_row, end_row = st.session_state.start_row, st.session_state.end_row
 
-            with col_ctrl2: downsample_rate = st.slider("Downsample", 1, 100, 1)
-            with col_ctrl3: view_mode = st.radio("View Mode", ["Overlay", "Stacked"], horizontal=True)
+            with col_ctrl2: downsample_rate = st.slider("Signal Downsample Rate", 1, 100, 1)
+            with col_ctrl3: view_mode = st.radio("Display View Mode", ["Overlay", "Stacked"], horizontal=True)
 
             # --- Annotation Management ---
             db_anns = get_annotations(current_doc_id)
@@ -266,33 +338,39 @@ elif app_mode == "Analysis Dashboard":
             with st.sidebar:
                 st.header("3. Annotation Filters")
                 unique_labels = sorted(list(set([a['label'] for a in all_current_anns])))
-                selected_labels = st.multiselect("Show in Legend/Plot", options=unique_labels, default=unique_labels)
+                selected_labels = st.multiselect("Toggle Annotation Visibility", options=unique_labels, default=unique_labels)
 
-            with st.expander("📝 Annotation Toolkit", expanded=False):
-                st.markdown("#### 🛠️ Stress Test Injection")
-                stress_file = st.file_uploader("Upload annotation_stress_test.json", type=['json'])
-                if stress_file:
+            with st.expander("📝 Manual Annotation Toolkit", expanded=False):
+                # RESTORED FEATURE: CUSTOM LABEL UPLOAD
+                st.markdown("#### 📂 Load Custom Event Labels")
+                label_file = st.file_uploader("Upload comma-separated labels (.txt)", type=['txt'])
+                if label_file:
                     try:
-                        s_data = json.load(stress_file); injected = []
-                        for item in s_data:
-                            at = "Instantaneous" if item.get("type") == "point" else "Interval"
-                            injected.append({"label": item.get("label", "Stress_Test"), "type": at, "start_time": item.get("time", item.get("start")), "end_time": item.get("time", item.get("end")), "notes": "Stress Test Injection"})
-                        st.session_state.stress_test_annotations = injected; st.success("Loaded Stress Test!")
-                    except Exception as e: st.error(f"Error: {e}")
-
+                        content = label_file.getvalue().decode("utf-8")
+                        # Split by comma and clean whitespace
+                        st.session_state.custom_labels = [l.strip() for l in content.split(',') if l.strip()]
+                        st.success(f"✅ Loaded {len(st.session_state.custom_labels)} custom labels!")
+                    except Exception as e:
+                        st.error(f"Error parsing labels: {e}")
+                
+                st.markdown("---")
                 ac1, ac2, ac3, ac4, ac5 = st.columns([1.5, 1, 1, 1.5, 1])
-                with ac2: ann_type = st.selectbox("Type", ["Interval", "Instantaneous"])
-                with ac1: ann_label = st.selectbox("Event Label", list(dict.fromkeys(st.session_state.custom_labels + ["Noise", "Artifact", "Arrhythmia", "R-wave"])))
+                with ac2: ann_type = st.selectbox("Event Type", ["Interval", "Instantaneous"])
+                with ac1:
+                    # Dynamically combine custom labels with defaults
+                    default_labels = ["Noise", "Artifact", "Arrhythmia", "R-wave"]
+                    combined_labels = list(dict.fromkeys(st.session_state.custom_labels + default_labels))
+                    ann_label = st.selectbox("Event Label", combined_labels)
                 
                 unit_label = "(Samples)" if use_index else "(sec)"
                 def_start = start_row if use_index else (start_row / fs_val)
                 def_end = end_row if use_index else (end_row / fs_val)
                 
-                with ac3: ann_start_input = st.number_input(f"Start {unit_label}", value=float(def_start))
-                with ac4: ann_end_input = st.number_input(f"End {unit_label}", value=float(def_end), disabled=(ann_type=="Instantaneous"))
-                with ac5: st.write(""); add_btn = st.button("➕ Add Event")
+                with ac3: ann_start_input = st.number_input(f"Start Point {unit_label}", value=float(def_start))
+                with ac4: ann_end_input = st.number_input(f"End Point {unit_label}", value=float(def_end), disabled=(ann_type=="Instantaneous"))
+                with ac5: st.write(""); add_btn = st.button("➕ Add Manual Event")
                 
-                notes = st.text_area("Notes")
+                notes = st.text_area("Clinical/Research Notes")
                 if add_btn and ann_label:
                     if use_index:
                         ann_start_sec, ann_end_sec = ann_start_input / fs_val, ann_end_input / fs_val
@@ -306,41 +384,49 @@ elif app_mode == "Analysis Dashboard":
                 if db_anns:
                     df_db_anns = pd.DataFrame(db_anns)
                     st.dataframe(df_db_anns[['label', 'type', 'start_time', 'end_time']], use_container_width=True, height=150)
-                    del_id = st.selectbox("Delete Entry", [a['id'] for a in db_anns], format_func=lambda x: f"ID: {x[-6:]}")
-                    if st.button("Confirm Delete"): delete_annotation(current_doc_id, del_id); st.rerun()
+                    del_id = st.selectbox("Delete Specific Entry", [a['id'] for a in db_anns], format_func=lambda x: f"ID: {x[-6:]}")
+                    if st.button("Confirm Delete Entry"): delete_annotation(current_doc_id, del_id); st.rerun()
                 
                 st.markdown("---")
-                st.write("**Export Data**")
+                st.write("**Dataset Export Options**")
                 col_export_1, col_export_2 = st.columns(2)
                 with col_export_1:
                     if db_anns:
                         csv_anns = pd.DataFrame(db_anns).to_csv(index=False).encode('utf-8')
-                        st.download_button("📥 Download Annotations (CSV)", csv_anns, f"annotations_{current_doc_id}.csv", "text/csv", use_container_width=True)
+                        st.download_button("📥 Download Manual Annotations (CSV)", csv_anns, f"annotations_{current_doc_id}.csv", "text/csv", use_container_width=True)
                 with col_export_2:
-                    if st.checkbox("Prepare Merged Dataset (ML)"):
-                        with st.spinner("Merging..."):
+                    if st.checkbox("Prepare Merged Dataset for ML Training"):
+                        with st.spinner("Merging dataset..."):
                             merged_df = merge_annotations(df, db_anns, x_axis, use_index, fs=fs_val)
                             csv_merged = merged_df.to_csv(index=use_index).encode('utf-8')
                             st.download_button("📦 Download Merged Dataset (CSV)", csv_merged, f"merged_{current_doc_id}.csv", "text/csv", type="primary", use_container_width=True)
 
-            # --- PLOTTING LOGIC ---
+            # --- PLOTTING LOGIC (NORMALIZED SCALING) ---
             if selected_columns:
-                with st.spinner("Rendering Plot..."):
-                    # Timing block starts here
+                with st.spinner("Rendering Signal Visualization..."):
                     with firebase_module.PerformanceMonitor() as pm:
                         df_slice = df.iloc[start_row:end_row:downsample_rate]
                         x_data = df_slice.index if use_index else df_slice[x_axis]
+                        
+                        # Reduced vertical spacing for standard view
                         fig = make_subplots(rows=len(selected_columns), cols=1, shared_xaxes=True, vertical_spacing=0.05) if view_mode == "Stacked" else go.Figure()
+                        
                         for i, col in enumerate(selected_columns):
-                            trace = go.Scattergl(x=x_data, y=df_slice[col], mode='lines', name=col)
+                            trace = go.Scattergl(x=x_data, y=df_slice[col], mode='lines', name=col, line=dict(width=1.5))
                             if view_mode == "Stacked": fig.add_trace(trace, row=i+1, col=1)
                             else: fig.add_trace(trace)
 
                         plot_anns = [a for a in all_current_anns if a['label'] in selected_labels]
                         px_colors = px.colors.qualitative.Alphabet 
                         color_map = {lbl: px_colors[idx % len(px_colors)] for idx, lbl in enumerate(selected_labels)}
+                        
+                        # Standard horizontal legend
                         for lbl in selected_labels:
-                            fig.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color=color_map[lbl], size=12, symbol='square'), name=f"Event: {lbl}", showlegend=True, legendgroup="Annotations"))
+                            fig.add_trace(go.Scatter(
+                                x=[None], y=[None], mode='markers', 
+                                marker=dict(color=color_map[lbl], size=12, symbol='square'), 
+                                name=f"<b>{lbl}</b>", showlegend=True
+                            ))
 
                         for ann in plot_anns:
                             s_idx = ann.get('sample_idx', int(ann['start_time'] * fs_val))
@@ -349,38 +435,76 @@ elif app_mode == "Analysis Dashboard":
                                 x_pos = s_idx if use_index else (s_idx / fs_val)
                                 color = color_map.get(ann['label'], "gray")
                                 if ann.get('type') == 'Instantaneous':
-                                    fig.add_vline(x=x_pos, line_width=1.5, line_dash="dash", line_color=color, opacity=0.9)
+                                    fig.add_vline(x=x_pos, line_width=1, line_dash="dash", line_color=color, opacity=0.9)
                                     try: y_max = df_slice[selected_columns[0]].max()
                                     except: y_max = 0
-                                    fig.add_trace(go.Scattergl(x=[x_pos], y=[y_max], mode='markers', marker=dict(color=color, size=12, symbol='diamond-tall'), hoverinfo='text', text=f"{ann['label']}: {ann.get('notes', '')}", showlegend=False))
+                                    fig.add_trace(go.Scattergl(
+                                        x=[x_pos], y=[y_max], mode='markers', 
+                                        marker=dict(color=color, size=10, symbol='diamond-tall'), 
+                                        hoverinfo='text', text=f"{ann['label']}", 
+                                        showlegend=False
+                                    ))
                                 else:
                                     x_end = e_idx if use_index else (e_idx / fs_val)
                                     fig.add_vrect(x0=x_pos, x1=x_end, fillcolor=color, opacity=0.3, layer="below", line_width=0, row="all" if view_mode == "Stacked" else None)
 
-                        dynamic_x_title = "Samples (N)" if use_index else (x_axis if not use_index else "Time")
+                        # AXIS & FONT FORMATTING (STANDARD SCALING)
+                        dynamic_x_title = "<b>Samples (N)</b>" if use_index else (f"<b>{x_axis}</b>" if not use_index else "<b>Time (s)</b>")
                         medical_keywords = ['ecg', 'mlii', 'v1', 'eda', 'ppg']
                         is_medical = any(any(k in col.lower() for k in medical_keywords) for col in selected_columns)
-                        dynamic_y_title = "Amplitude (mV)" if is_medical else "Magnitude"
-                        fig.update_layout(height=400*len(selected_columns) if view_mode == "Stacked" else 600, template="plotly_white", legend=dict(groupclick="toggleitem", font=dict(size=16), itemsizing='constant'), xaxis_title=dict(text=dynamic_x_title, font=dict(size=18)), yaxis_title=dict(text=dynamic_y_title, font=dict(size=18)) if view_mode == "Overlay" else None, font=dict(size=14), margin=dict(t=50))
-                        fig.update_xaxes(title_font=dict(size=18), tickfont=dict(size=14))
-                        fig.update_yaxes(title_font=dict(size=18), tickfont=dict(size=14))
-                        if view_mode == "Stacked":
-                            for i in range(len(selected_columns)): fig.update_yaxes(title_text=dynamic_y_title, row=i+1, col=1, title_font=dict(size=18))
+                        dynamic_y_title = "<b>Amplitude (mV)</b>" if is_medical else "<b>Magnitude</b>"
+
+                        # Standard plot settings
+                        axis_title_fs = 15
+                        tick_fs = 12
+                        legend_fs = 13
+
+                        fig.update_layout(
+                            height=400*len(selected_columns) if view_mode == "Stacked" else 600, 
+                            template="plotly_white", 
+                            legend=dict(
+                                groupclick="toggleitem", 
+                                font=dict(size=legend_fs), 
+                                itemsizing='constant',
+                                orientation="h",
+                                yanchor="bottom",
+                                y=1.05,
+                                xanchor="center",
+                                x=0.5
+                            ), 
+                            xaxis_title=dict(text=dynamic_x_title, font=dict(size=axis_title_fs)), 
+                            yaxis_title=dict(text=dynamic_y_title, font=dict(size=axis_title_fs)) if view_mode == "Overlay" else None, 
+                            font=dict(size=tick_fs), 
+                            margin=dict(t=100, b=100, l=100, r=40)
+                        )
                         
-                        # Trigger chart render inside the timing block
+                        fig.update_xaxes(title_font=dict(size=axis_title_fs), tickfont=dict(size=tick_fs), showline=True, mirror=True)
+                        fig.update_yaxes(title_font=dict(size=axis_title_fs), tickfont=dict(size=tick_fs), showline=True, mirror=True)
+                        
+                        if view_mode == "Stacked":
+                            for i in range(len(selected_columns)): 
+                                fig.update_yaxes(title_text=dynamic_y_title, row=i+1, col=1, title_font=dict(size=axis_title_fs))
+                        
                         st.plotly_chart(fig, use_container_width=True)
                     
-                    # Display metrics AFTER block closure so duration is calculated
-                    st.caption(f"⚡ Plot Gen: {pm.duration*1000:.2f} ms")
+                    st.caption(f"⚡ Performance Metrics | Plot Generation: {pm.duration*1000:.2f} ms")
 
             st.markdown("---")
             st.subheader("2. Advanced ECG Analysis")
-            with st.expander("ECG Settings"):
-                tgt = st.selectbox("ECG Col", [c for c in df.columns if any(x in c.lower() for x in ['ecg', 'mlii', 'v1'])] or df.columns)
-                if st.button("Run Analysis"):
+            with st.expander("ECG Algorithm Settings"):
+                tgt = st.selectbox("Select Target ECG Lead", [c for c in df.columns if any(x in c.lower() for x in ['ecg', 'mlii', 'v1'])] or df.columns)
+                if st.button("Execute Peak Detection"):
                     peaks, hr, _, clean = process_ecg(df[tgt].iloc[start_row:end_row], fs_val)
-                    f1 = go.Figure(); f1.add_trace(go.Scattergl(y=clean, name='Signal', line_color='gray'))
-                    f1.add_trace(go.Scattergl(x=peaks, y=clean[peaks], mode='markers', name='R-Peaks', marker_color='red'))
+                    f1 = go.Figure()
+                    f1.add_trace(go.Scattergl(y=clean, name='Processed Lead', line_color='gray', line=dict(width=1.5)))
+                    f1.add_trace(go.Scattergl(x=peaks, y=clean[peaks], mode='markers', name='Detected R-Peaks', marker=dict(color='red', size=8, symbol='x')))
+                    f1.update_layout(
+                        template="plotly_white", 
+                        font=dict(size=12),
+                        xaxis_title=dict(text="<b>Sample Index</b>", font=dict(size=14)),
+                        yaxis_title=dict(text="<b>Voltage (mV)</b>", font=dict(size=14)),
+                        margin=dict(t=50, b=50, l=50, r=40)
+                    )
                     st.plotly_chart(f1, use_container_width=True)
 
 # -----------------------------------------------------------------------------
@@ -388,13 +512,13 @@ elif app_mode == "Analysis Dashboard":
 # -----------------------------------------------------------------------------
 elif app_mode == "Evaluation Experiment":
     st.header("🧪 Experiment: Visualization Latency Benchmark")
-    source_type = st.radio("Data Source", ["Local Path", "File Upload"], horizontal=True)
+    source_type = st.radio("Experiment Data Source", ["Local Path", "File Upload"], horizontal=True)
     dataset_path = None
     
     if source_type == "Local Path":
-        dataset_path = st.text_input("Local Path", placeholder="/path/to/dataset").strip()
+        dataset_path = st.text_input("Directory Path", placeholder="/path/to/dataset").strip()
     else: 
-        uploaded_files = st.file_uploader("Upload Data Files (CSV or WFDB Folder Content)", accept_multiple_files=True)
+        uploaded_files = st.file_uploader("Upload Benchmark Files (CSV or WFDB Pairs)", accept_multiple_files=True)
         if uploaded_files:
             if 'eval_temp_dir' not in st.session_state: st.session_state.eval_temp_dir = tempfile.mkdtemp()
             for uf in uploaded_files:
@@ -405,7 +529,7 @@ elif app_mode == "Evaluation Experiment":
 
     if dataset_path and os.path.exists(dataset_path):
         if 'eval_files' not in st.session_state: st.session_state.eval_files = []
-        if st.button("Scan Directory"):
+        if st.button("Scan Dataset Directory"):
             found = []
             for root, dirs, files in os.walk(dataset_path):
                 for f in files:
@@ -430,23 +554,23 @@ elif app_mode == "Evaluation Experiment":
                             })
                         except: pass
             st.session_state.eval_files = found
-            st.success(f"Found {len(found)} records (CSV and WFDB supported).")
+            st.success(f"Discovered {len(found)} valid signal records.")
 
         if st.session_state.eval_files:
-            st.subheader("⚙️ Benchmark Settings")
-            with st.expander("📂 File Filtering", expanded=True):
-                filter_term = st.text_input("Filter files by name substring", "")
+            st.subheader("⚙️ Benchmark Configuration")
+            with st.expander("📂 Filter Record List", expanded=True):
+                filter_term = st.text_input("Substring Filter (Case-Insensitive)", "")
                 filtered_files = [f for f in st.session_state.eval_files if filter_term.lower() in f['file'].lower()]
-                st.write(f"**Status:** {len(filtered_files)} files selected.")
+                st.write(f"**Selection Status:** {len(filtered_files)} records queued.")
 
             c1, c2, c3 = st.columns(3)
-            with c1: n_trials = st.number_input("Trials per File", 1, 20, 5)
-            with c2: n_ch = st.number_input("Channels to Render", 1, 20, 1)
-            with c3: max_p = st.number_input("Max Points (0=All)", 0, 1000000, 0)
+            with c1: n_trials = st.number_input("Number of Trials", 1, 20, 5)
+            with c2: n_ch = st.number_input("Channels to Process", 1, 20, 1)
+            with c3: max_p = st.number_input("Max Point Limit (0=All)", 0, 1000000, 0)
 
-            if st.button("🚀 Start Benchmark"):
+            if st.button("🚀 Execute Latency Benchmark"):
                 if not filtered_files:
-                    st.error("No files match filter.")
+                    st.error("No records matched the filter criteria.")
                 else:
                     sid = firebase_module.create_analysis_session("BENCHMARK", "evaluation_experiment")
                     pb = st.progress(0); status = st.empty()
@@ -454,7 +578,7 @@ elif app_mode == "Evaluation Experiment":
                     
                     for f_info in filtered_files:
                         try:
-                            status.write(f"Preparing data for {f_info['file']}...")
+                            status.write(f"Loading Record: {f_info['file']}...")
                             t_load_start = time.perf_counter()
                             if f_info['type'] == 'WFDB':
                                 record, _ = wfdb.rdsamp(f_info['path'])
@@ -466,7 +590,7 @@ elif app_mode == "Evaluation Experiment":
                             t_load = time.perf_counter() - t_load_start
                             
                             for t in range(n_trials):
-                                status.write(f"Benchmarking {f_info['file']} (Trial {t+1}/{n_trials})")
+                                status.write(f"Trial {t+1}/{n_trials} for {f_info['file']}")
                                 t1 = time.perf_counter()
                                 fig = go.Figure()
                                 end_idx = max_p if (max_p > 0 and max_p < len(data_block)) else len(data_block)
@@ -474,7 +598,6 @@ elif app_mode == "Evaluation Experiment":
                                 for ch_idx in range(actual_ch):
                                     fig.add_trace(go.Scatter(y=data_block[:end_idx, ch_idx], mode='lines'))
                                 
-                                # Serialization/Rendering simulation if needed, but we time construction
                                 t_plot = time.perf_counter() - t1
                                 total_p = end_idx * actual_ch
                                 
@@ -484,11 +607,11 @@ elif app_mode == "Evaluation Experiment":
                             
                             del data_block; gc.collect()
                         except Exception as e:
-                            st.error(f"Error on {f_info['file']}: {str(e)}")
+                            st.error(f"Execution Error on {f_info['file']}: {str(e)}")
                             curr_op += n_trials; pb.progress(min(1.0, curr_op / total_ops))
                     
-                    st.success("Benchmark Finished"); st.balloons()
-                    with st.spinner("Preparing Results CSV..."):
+                    st.success("Experimental Benchmark Complete!"); st.balloons()
+                    with st.spinner("Compiling Results CSV..."):
                         df_results = firebase_module.fetch_benchmark_results(sid)
                         if not df_results.empty:
-                            st.download_button("📥 Download Benchmark Results (CSV)", df_results.to_csv(index=False).encode('utf-8'), f"benchmark_{sid}.csv", "text/csv", type="primary")
+                            st.download_button("📥 Download Latency Results (CSV)", df_results.to_csv(index=False).encode('utf-8'), f"benchmark_{sid}.csv", "text/csv", type="primary")
