@@ -19,11 +19,7 @@ import uuid
 import gc
 import warnings
 import json
-from machine_learning.RF.ml_random_forest import rf_leave_one_participant_out_weighted #rf_leave_one_participant_out_undersampled
-from machine_learning.SVM.ml_svm import svm_leave_one_participant_out_weighted
-from machine_learning.DT.ml_dt import dt_leave_one_participant_out
-from machine_learning.GB.ml_gb import gb_leave_one_participant_out
-from processing_helpers import *
+
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 try:
@@ -190,18 +186,95 @@ def load_data(file):
         st.error(f"Error loading file: {e}")
         return None, None, []
 
+def process_ecg(data_series, fs, method="pantompkins1985", invert=False):
+    try:
+        series = pd.to_numeric(data_series, errors='coerce').interpolate().ffill().bfill().fillna(0)
+        clean_data = series.values.astype(np.float64)
+        if invert: clean_data = -clean_data
+        ecg_cleaned = nk.ecg_clean(clean_data, sampling_rate=fs, method="neurokit")
+        _, info = nk.ecg_peaks(ecg_cleaned, sampling_rate=fs, method=method)
+        peaks = info['ECG_R_Peaks']
+        heart_rate = nk.signal_rate(peaks, sampling_rate=fs, desired_length=len(clean_data)) if len(peaks) >= 2 else np.zeros(len(clean_data))
+        return peaks, heart_rate, {}, ecg_cleaned
+    except: return [], [], {}, np.zeros(10)
+
+def save_annotation(session_id, start_t, end_t, label, notes, ann_type, sample_idx=None):
+    db = firebase_module.init_firebase()
+    if db and session_id:
+        try:
+            db.collection('analysis_logs').document(session_id).collection('annotations').add({
+                'start_time': start_t, 'end_time': end_t, 'sample_idx': sample_idx,
+                'label': label, 'type': ann_type, 'notes': notes,
+                'created_at': firebase_module.firestore.SERVER_TIMESTAMP
+            })
+            return True
+        except: return False
+    return False
+
+def get_annotations(session_id):
+    db = firebase_module.init_firebase()
+    anns = []
+    if db and session_id:
+        try:
+            docs = db.collection('analysis_logs').document(session_id).collection('annotations').order_by('start_time').stream()
+            for d in docs:
+                dd = d.to_dict(); dd['id'] = d.id; anns.append(dd)
+        except: pass
+    return anns
+
+def delete_annotation(session_id, ann_id):
+    db = firebase_module.init_firebase()
+    if db and session_id:
+        try:
+            db.collection('analysis_logs').document(session_id).collection('annotations').document(ann_id).delete()
+        except: pass
+
+def merge_annotations(df, annotations, x_col, use_index, fs=1):
+    merged = df.copy()
+    merged['event_label'] = None
+    merged['event_type'] = None
+    merged['event_notes'] = None
+    
+    for ann in annotations:
+        ann_type = ann.get('type', 'Interval')
+        s_idx = ann.get('sample_idx')
+        if s_idx is None:
+            s_idx = int(ann['start_time'] * fs)
+        e_idx = int(ann['end_time'] * fs) if ann_type == 'Interval' else s_idx
+
+        mask = None
+        if use_index:
+            if ann_type == 'Instantaneous':
+                if 0 <= s_idx < len(merged): mask = merged.index == s_idx
+            else:
+                mask = (merged.index >= s_idx) & (merged.index <= e_idx)
+        else:
+            start_val = ann['start_time']
+            end_val = ann['end_time']
+            if ann_type == 'Instantaneous':
+                try:
+                    if pd.api.types.is_numeric_dtype(merged[x_col]):
+                        idx = (merged[x_col] - start_val).abs().idxmin()
+                        mask = merged.index == idx
+                    else: mask = merged[x_col] == start_val
+                except: pass
+            else:
+                mask = (merged[x_col] >= start_val) & (merged[x_col] <= end_val)
+        
+        if mask is not None and (mask.any() if hasattr(mask, 'any') else mask is not None):
+            def append_str(current, new):
+                if pd.isna(current) or current == "" or current is None: return new
+                if new in str(current): return current
+                return f"{current}; {new}"
+            merged.loc[mask, 'event_label'] = merged.loc[mask, 'event_label'].apply(lambda x: append_str(x, ann['label']))
+            merged.loc[mask, 'event_type'] = merged.loc[mask, 'event_type'].apply(lambda x: append_str(x, ann['type']))
+            if ann.get('notes'):
+                merged.loc[mask, 'event_notes'] = merged.loc[mask, 'event_notes'].apply(lambda x: append_str(x, ann['notes']))
+    return merged
 
 with st.sidebar:
     st.title("Navigation")
-    app_mode = st.radio(
-        "Select Mode",
-        [
-            "Analysis Dashboard",
-            "Machine Learning (LOPO)",
-            "CSV Concatenator (Prep)",
-            "Evaluation Experiment"
-        ]
-    )    
+    app_mode = st.radio("Select Mode", ["Analysis Dashboard", "CSV Concatenator (Prep)", "Evaluation Experiment"])
     st.markdown("---")
 
 if app_mode == "CSV Concatenator (Prep)":
@@ -255,14 +328,8 @@ elif app_mode == "Analysis Dashboard":
                     st.session_state.end_row = st.session_state.start_row + win; st.rerun()
                 start_row, end_row = st.session_state.start_row, st.session_state.end_row
 
-            # --- UPDATED: ADDED REMOVE ZEROS AND OUTLIER THRESHOLD ---
-            with col_ctrl2: 
-                downsample_rate = st.slider("Signal Downsample Rate", 1, 100, 1)
-                remove_zeros = st.checkbox("🚫 Remove Zeros", value=False, help="Replaces 0.0 with gaps in the plot.")
-            with col_ctrl3: 
-                view_mode = st.radio("Display View Mode", ["Overlay", "Stacked"], horizontal=True)
-                outlier_sigma = st.number_input("Outlier Z-Score Threshold", min_value=0.0, max_value=10.0, value=0.0, step=0.5, 
-                                               help="Removes points N standard deviations from mean. Set to 0 to disable.")
+            with col_ctrl2: downsample_rate = st.slider("Signal Downsample Rate", 1, 100, 1)
+            with col_ctrl3: view_mode = st.radio("Display View Mode", ["Overlay", "Stacked"], horizontal=True)
 
             # --- Annotation Management ---
             db_anns = get_annotations(current_doc_id)
@@ -274,11 +341,13 @@ elif app_mode == "Analysis Dashboard":
                 selected_labels = st.multiselect("Toggle Annotation Visibility", options=unique_labels, default=unique_labels)
 
             with st.expander("📝 Manual Annotation Toolkit", expanded=False):
+                # RESTORED FEATURE: CUSTOM LABEL UPLOAD
                 st.markdown("#### 📂 Load Custom Event Labels")
                 label_file = st.file_uploader("Upload comma-separated labels (.txt)", type=['txt'])
                 if label_file:
                     try:
                         content = label_file.getvalue().decode("utf-8")
+                        # Split by comma and clean whitespace
                         st.session_state.custom_labels = [l.strip() for l in content.split(',') if l.strip()]
                         st.success(f"✅ Loaded {len(st.session_state.custom_labels)} custom labels!")
                     except Exception as e:
@@ -288,6 +357,7 @@ elif app_mode == "Analysis Dashboard":
                 ac1, ac2, ac3, ac4, ac5 = st.columns([1.5, 1, 1, 1.5, 1])
                 with ac2: ann_type = st.selectbox("Event Type", ["Interval", "Instantaneous"])
                 with ac1:
+                    # Dynamically combine custom labels with defaults
                     default_labels = ["Noise", "Artifact", "Arrhythmia", "R-wave"]
                     combined_labels = list(dict.fromkeys(st.session_state.custom_labels + default_labels))
                     ann_label = st.selectbox("Event Label", combined_labels)
@@ -335,29 +405,14 @@ elif app_mode == "Analysis Dashboard":
             if selected_columns:
                 with st.spinner("Rendering Signal Visualization..."):
                     with firebase_module.PerformanceMonitor() as pm:
-                        # Senior dev tip: Use .copy() when filtering view data to avoid SettingWithCopyWarning
-                        df_slice = df.iloc[start_row:end_row:downsample_rate].copy()
+                        df_slice = df.iloc[start_row:end_row:downsample_rate]
                         x_data = df_slice.index if use_index else df_slice[x_axis]
-
-                        # --- UPDATED: DATA CLEANING FILTERS ---
-                        for col in selected_columns:
-                            # Filter 1: Remove Zeros
-                            if remove_zeros:
-                                df_slice[col] = df_slice[col].replace(0, np.nan)
-                            
-                            # Filter 2: Statistical Outlier Removal
-                            if outlier_sigma > 0:
-                                series_data = df_slice[col]
-                                if not series_data.dropna().empty:
-                                    z_scores = np.abs((series_data - series_data.mean()) / series_data.std())
-                                    df_slice.loc[z_scores > outlier_sigma, col] = np.nan
-                        # --------------------------------------
                         
+                        # Reduced vertical spacing for standard view
                         fig = make_subplots(rows=len(selected_columns), cols=1, shared_xaxes=True, vertical_spacing=0.05) if view_mode == "Stacked" else go.Figure()
                         
                         for i, col in enumerate(selected_columns):
-                            # Plotly automatically handles np.nan by leaving gaps in the line
-                            trace = go.Scattergl(x=x_data, y=df_slice[col], mode='lines', name=col, line=dict(width=1.5), connectgaps=False)
+                            trace = go.Scattergl(x=x_data, y=df_slice[col], mode='lines', name=col, line=dict(width=1.5))
                             if view_mode == "Stacked": fig.add_trace(trace, row=i+1, col=1)
                             else: fig.add_trace(trace)
 
@@ -365,6 +420,7 @@ elif app_mode == "Analysis Dashboard":
                         px_colors = px.colors.qualitative.Alphabet 
                         color_map = {lbl: px_colors[idx % len(px_colors)] for idx, lbl in enumerate(selected_labels)}
                         
+                        # Standard horizontal legend
                         for lbl in selected_labels:
                             fig.add_trace(go.Scatter(
                                 x=[None], y=[None], mode='markers', 
@@ -392,11 +448,13 @@ elif app_mode == "Analysis Dashboard":
                                     x_end = e_idx if use_index else (e_idx / fs_val)
                                     fig.add_vrect(x0=x_pos, x1=x_end, fillcolor=color, opacity=0.3, layer="below", line_width=0, row="all" if view_mode == "Stacked" else None)
 
+                        # AXIS & FONT FORMATTING (STANDARD SCALING)
                         dynamic_x_title = "<b>Samples (N)</b>" if use_index else (f"<b>{x_axis}</b>" if not use_index else "<b>Time (s)</b>")
                         medical_keywords = ['ecg', 'mlii', 'v1', 'eda', 'ppg']
                         is_medical = any(any(k in col.lower() for k in medical_keywords) for col in selected_columns)
                         dynamic_y_title = "<b>Amplitude (mV)</b>" if is_medical else "<b>Magnitude</b>"
 
+                        # Standard plot settings
                         axis_title_fs = 15
                         tick_fs = 12
                         legend_fs = 13
@@ -448,126 +506,7 @@ elif app_mode == "Analysis Dashboard":
                         margin=dict(t=50, b=50, l=50, r=40)
                     )
                     st.plotly_chart(f1, use_container_width=True)
-# -----------------------------------------------------------------------------
-# MACHINE LEARNING (LOPO)
-# -----------------------------------------------------------------------------
-elif app_mode == "Machine Learning (LOPO)":
 
-    st.title("🤖 Machine Learning – Leave-One-Participant-Out")
-
-    st.info("""
-    Upload a feature table (e.g., PSD features).
-
-    Required columns:
-    - participantId
-    - BehaviorCode
-    """)
-
-    uploaded_file = st.file_uploader(
-        "Drag & Drop Feature CSV Here",
-        type=["csv"]
-    )
-
-    if uploaded_file:
-
-        df_raw = pd.read_csv(uploaded_file)
-
-        st.success(f"Loaded: {uploaded_file.name}")
-        st.write("Shape:", df_raw.shape)
-
-        # ------------------------------
-        # Validate Required Columns
-        # ------------------------------
-        required_cols = ["participantId", "BehaviorCode"]
-
-        if not all(col in df_raw.columns for col in required_cols):
-            st.error("Missing required columns: participantId or BehaviorCode")
-            st.stop()
-
-        # Binary label enforcement
-        df_raw["type"] = df_raw["BehaviorCode"]
-        df_raw = df_raw[df_raw["type"].isin([0, 1])]
-
-        st.write("Class Distribution:")
-        st.write(df_raw["type"].value_counts())
-
-        # ------------------------------
-        # Model Selection
-        # ------------------------------
-        model_choice = st.selectbox(
-            "Select ML Model",
-            [
-                "Random Forest",
-                "Support Vector Machine",
-                "Decision Tree",
-                "Gradient Boosting"
-            ]
-        )
-
-        undersample_choice = st.selectbox(
-            "Undersampling Method",
-            ["Rus", "Clus", "None"]
-        )
-
-        if st.button("🚀 Run LOPO Training"):
-
-            with firebase_module.PerformanceMonitor() as pm:
-
-                start_time = time.time()
-
-                if model_choice == "Random Forest":
-                    results_df, summary = rf_leave_one_participant_out_weighted(
-                        df_raw,
-                        undersample_method=undersample_choice,
-                        save_dir=None
-                    )
-
-                elif model_choice == "Support Vector Machine":
-                    results_df, summary = svm_leave_one_participant_out_weighted(
-                        df_raw,
-                        undersample_method=undersample_choice,
-                        save_dir=None
-                    )
-
-                elif model_choice == "Decision Tree":
-                    results_df, summary = dt_leave_one_participant_out(
-                        df_raw,
-                        undersample_method=undersample_choice,
-                        save_dir=None
-                    )
-
-                elif model_choice == "Gradient Boosting":
-                    results_df, summary = gb_leave_one_participant_out(
-                        df_raw,
-                        undersample_method=undersample_choice,
-                        save_dir=None
-                    )
-
-                end_time = time.time()
-
-            duration_sec = end_time - start_time
-
-            st.success("Training Completed!")
-
-            st.subheader("📊 Fold-Level Results")
-            st.dataframe(results_df, use_container_width=True)
-
-            st.subheader("📈 Summary Metrics")
-            st.json(summary)
-
-            st.download_button(
-                "Download Fold Results CSV",
-                results_df.to_csv(index=False),
-                file_name=f"{model_choice}_LOPO_results.csv"
-            )
-
-            st.download_button(
-                "Download Summary JSON",
-                json.dumps(summary, indent=4),
-                file_name=f"{model_choice}_LOPO_summary.json"
-            )
-
-            st.caption(f"⚡ Total Training Time: {duration_sec:.2f} seconds")
 # -----------------------------------------------------------------------------
 # Evaluation Benchmarking
 # -----------------------------------------------------------------------------

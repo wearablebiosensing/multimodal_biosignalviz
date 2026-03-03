@@ -12,9 +12,8 @@ RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 COPY firebase_key.json .
 COPY biosignal_viz.py .
+COPY agent.py .
 COPY firebase_module.py .
 COPY firestore_export.py .
-COPY machine_learning ./machine_learning
-COPY processing_helpers.py .
 EXPOSE 8501
 CMD ["streamlit", "run", "biosignal_viz.py", "--server.port=8501", "--server.address=0.0.0.0"]

@@ -1,0 +1,14 @@
+{
+    "Total_Folds": 18,
+    "Valid_Folds": 13,
+    "Micro_Accuracy_Mean": 0.6757990566744111,
+    "Micro_Accuracy_STD": 0.09002642618150396,
+    "Macro_Balanced_Accuracy_Mean": 0.6434761594264589,
+    "Macro_Balanced_Accuracy_STD": 0.11636195826663141,
+    "Macro_F1_Mean": 0.1200970510850827,
+    "Macro_F1_STD": 0.10751356443585579,
+    "Macro_Sensitivity_Mean": 0.6007469758971327,
+    "Macro_Sensitivity_STD": 0.22224749266128926,
+    "Macro_Specificity_Mean": 0.6862053429557852,
+    "Macro_Specificity_STD": 0.0763168474792592
+}
